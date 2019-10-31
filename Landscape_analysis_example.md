@@ -134,4 +134,25 @@ with significant infrastructure are generally much larger; one exception
 is Id 4038 which has Oyst\_i = 0.8647 and IfI = 9.34. This polygon is
 located on the west and south part of Nøtterøy. - It is noteworthy that
 the topographic variables give such a strong signal when there is so
-little topography variation within costal plains.
+little topography variation within costal
+plains.
+
+![](Landscape_analysis_example_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
+
+![](Landscape_analysis_example_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
+
+![](Landscape_analysis_example_files/figure-gfm/unnamed-chunk-12-1.png)<!-- -->
+
+![](Landscape_analysis_example_files/figure-gfm/unnamed-chunk-13-1.png)<!-- -->
+
+![](Landscape_analysis_example_files/figure-gfm/unnamed-chunk-14-1.png)<!-- -->
+
+![](Landscape_analysis_example_files/figure-gfm/unnamed-chunk-15-1.png)<!-- -->
+
+![](Landscape_analysis_example_files/figure-gfm/unnamed-chunk-16-1.png)<!-- -->
+
+![](Landscape_analysis_example_files/figure-gfm/unnamed-chunk-17-1.png)<!-- -->
+
+![](Landscape_analysis_example_files/figure-gfm/unnamed-chunk-18-1.png)<!-- -->
+
+![](Landscape_analysis_example_files/figure-gfm/unnamed-chunk-19-1.png)<!-- -->

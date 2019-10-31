@@ -391,3 +391,202 @@ Complementary observations, axis 1 and 2:
 - Among the 69 OUs in KS lacking infrastructure (IfI = 0), all of the 56 as a largest island smaller than 1 km. Islands with significant infrastructure are generally much larger; one exception is Id 4038 which has Oyst_i = 0.8647 and IfI = 9.34. This polygon is located on the west and south part of Nøtterøy.
 - It is noteworthy that the topographic variables give such a strong signal when there is so little topography variation within costal plains.
 
+```{r, echo=FALSE}
+###Figurer med isolinjer på ordinasjonsdiagrammet (Ordisurf); akser 1 mot 2.
+par(mfrow=c(1,1))
+
+##For IfI med OI (akser 1 og 2)
+
+par(plt=c(0.15, 0.95, 0.15, y2))
+plot(akse1,akse2,xlab="GNMDS 1 Coastal plains (KS457)",ylab="GNMDS 2 Coastal plains (KS457)",xlim=c(min(akse1)-0.01,max(akse1)+0.01),ylim=c(min(akse2)-0.01,max(akse2)+0.01),xaxp=c(-0.5,1,3),yaxp=c(-0.5,0.5,2),type="n") #Grunnlag for plotting av symboler etc.
+lines(c(-2,2),c(0,0),lty=2,col=8)
+lines(c(0,0),c(-2,2),lty=2,col=8)
+
+os <- ordisurf(ordx,IfI,display="sites",levels=c(1,2,4,6,8,10,11,12,13,14), col="red",add=T) #inkluderer plotting på eksisterende ordinasjonsdiagram
+lines(c(-0.77,-0.74),c(0.535,0.535),col=2)
+text(-0.72,0.535,"IfI",adj=0,cex=0.8)
+
+#Punkter ulike farger og symboler for ulike infrastruktur-trinn (OI-klasser 1-6)
+points(akse1[OI==1],akse2[OI==1],pch=1,cex=0.6,col="lightblue3")
+points(akse1[OI==2],akse2[OI==2],pch=16,cex=0.6,col="lightblue3")
+points(akse1[OI==3],akse2[OI==3],pch=1,cex=0.75,col="lightblue4")
+points(akse1[OI==4],akse2[OI==4],pch=16,cex=0.75,col="lightblue4")
+points(akse1[OI==5],akse2[OI==5],pch=1,cex=0.9,col="red")
+points(akse1[OI==6],akse2[OI==6],pch=16,cex=0.9,col="red")
+points(-0.75,0.49,pch=1,cex=0.6,col="lightblue3")
+text(-0.72,0.49,"OI = 1",adj=0,cex=0.8)
+points(-0.75,0.45,pch=16,cex=0.6,col="lightblue3")
+text(-0.72,0.45,"OI = 2",adj=0,cex=0.8)
+points(-0.75,0.41,pch=1,cex=0.75,col="lightblue4")
+text(-0.72,0.41,"OI = 3",adj=0,cex=0.8)
+points(-0.75,0.37,pch=16,cex=0.75,col="lightblue4")
+text(-0.72,0.37,"OI = 4",adj=0,cex=0.8)
+points(-0.75,0.33,pch=1,cex=0.9,col="red")
+text(-0.72,0.33,"OI = 5",adj=0,cex=0.8)
+points(-0.75,0.29,pch=16,cex=0.9,col="red")
+text(-0.72,0.29,"OI = 6",adj=0,cex=0.8)
+```
+
+
+```{r, echo=FALSE}
+##For Arfull_a med JP (akser 1 og 2)
+par(mfrow=c(1,2))
+hist(Arfull_a)
+plot(IfI,JI)
+```
+
+
+```{r, echo=FALSE}
+par(plt=c(0.15, 0.95, 0.15, y2))
+plot(akse1,akse2,xlab="GNMDS 1 Coastal plains (KS457)",ylab="GNMDS 2 Coastal plains (KS457)",xlim=c(min(akse1)-0.01,max(akse1)+0.01),ylim=c(min(akse2)-0.01,max(akse2)+0.01),xaxp=c(-0.5,1,3),yaxp=c(-0.5,0.5,2),type="n") #Grunnlag for plotting av symboler etc.
+lines(c(-2,2),c(0,0),lty=2,col=8)
+lines(c(0,0),c(-2,2),lty=2,col=8)
+os <- ordisurf(ordx,Arfull_a,display="sites",levels=c(0.1,0.4,0.6,0.8), col="red",add=T) #inkluderer plotting på eksisterende ordinasjonsdiagram
+
+lines(c(-0.77,-0.74),c(0.535,0.535),col=2)
+text(-0.72,0.535,"Arfull_a",adj=0,cex=0.8)
+
+#Punkter ulike farger og symboler for ulike jordbrukspreg-trinn (JP 1-3)
+points(akse1[JP==1],akse2[JP==1],pch=1,cex=0.6,col="lightblue2")
+points(akse1[JP==2],akse2[JP==2],pch=16,cex=0.75,col="lightblue4")
+points(akse1[JP==3],akse2[JP==3],pch=16,cex=0.9,col="red")
+points(-0.75,0.49,pch=1,cex=0.6,col="lightblue2")
+text(-0.72,0.49,"JP = 1",adj=0,cex=0.8)
+points(-0.75,0.45,pch=16,cex=0.75,col="lightblue4")
+text(-0.72,0.45,"JP = 2",adj=0,cex=0.8)
+points(-0.75,0.41,pch=16,cex=0.9,col="red")
+text(-0.72,0.41,"JP = 3",adj=0,cex=0.8)
+```
+
+
+```{r, echo=FALSE}
+##For JI med JP (akser 1 og 2)
+
+hist(JI)
+```
+
+
+```{r, echo=FALSE}
+par(plt=c(0.15, 0.95, 0.15, y2))
+plot(akse1,akse2,xlab="GNMDS 1 Coastal plains (KS457)",ylab="GNMDS 2 Coastal plains (KS457)",xlim=c(min(akse1)-0.01,max(akse1)+0.01),ylim=c(min(akse2)-0.01,max(akse2)+0.01),xaxp=c(-0.5,1,3),yaxp=c(-0.5,0.5,2),type="n") #Grunnlag for plotting av symboler etc.
+lines(c(-2,2),c(0,0),lty=2,col=8)
+lines(c(0,0),c(-2,2),lty=2,col=8)
+
+os <- ordisurf(ordx,JI,display="sites",levels=c(0.01,0.025,0.05,0.1,0.2), col="red",add=T) #inkluderer plotting på eksisterende ordinasjonsdiagram
+lines(c(-0.77,-0.74),c(0.535,0.535),col=2)
+text(-0.72,0.535,"JI",adj=0,cex=0.8)
+
+#Punkter ulike farger og symboler for ulike jordbrukspreg-trinn (JP 1-3)
+points(akse1[JP==1],akse2[JP==1],pch=1,cex=0.6,col="lightblue2")
+points(akse1[JP==2],akse2[JP==2],pch=16,cex=0.75,col="lightblue4")
+points(akse1[JP==3],akse2[JP==3],pch=16,cex=0.9,col="red")
+points(-0.75,0.49,pch=1,cex=0.6,col="lightblue2")
+text(-0.72,0.49,"JP = 1",adj=0,cex=0.8)
+points(-0.75,0.45,pch=16,cex=0.75,col="lightblue4")
+text(-0.72,0.45,"JP = 2",adj=0,cex=0.8)
+points(-0.75,0.41,pch=16,cex=0.9,col="red")
+text(-0.72,0.41,"JP = 3",adj=0,cex=0.8)
+```
+
+
+```{r, echo=FALSE}
+##Fig. med jordartskategorier på akser 1 og 2
+
+par(plt=c(0.15, 0.95, 0.15, z2))
+plot(akse1,akse2,xlab="GNMDS 1 Coastal plains (KS457)",ylab="GNMDS 2 Coastal plains (KS457)",xlim=c(min(akse1)-0.01,max(akse1)+0.01),ylim=c(min(akse2)-0.01,max(akse2)+0.01),xaxp=c(-0.5,1,3),yaxp=c(-0.5,0.5,2),type="n") #Grunnlag for plotting av symboler etc.
+lines(c(-2,2),c(0,0),lty=2,col=8)
+lines(c(0,0),c(-2,2),lty=2,col=8)
+
+points(akse1[JK2=="H"],akse2[JK2=="H"],pch=16,cex=0.5,col="red")
+points(akse1[JK1=="H"],akse2[JK1=="H"],pch=16,cex=0.8,col="red3")
+points(akse1[JK1=="B"],akse2[JK1=="B"],pch=16,cex=0.4,col="black")
+points(akse1[JK1==0],akse2[JK1==0],pch=1,cex=0.5,col="lightblue4")
+
+points(-0.75,0.41,pch=1,cex=0.5,col="lightblue4")
+text(-0.72,0.41,"JK1 = 0 (ingen)",adj=0,cex=0.8)
+points(-0.75,0.45,pch=16,cex=0.4,col="black")
+text(-0.72,0.45,"JK1 = B (> 50 % NB)",adj=0,cex=0.8)
+points(-0.75,0.49,pch=16,cex=0.5,col="red")
+text(-0.72,0.49,"JK2 = H (> 25 % MA)",adj=0,cex=0.8)
+points(-0.75,0.53,pch=16,cex=0.8,col="red3")
+text(-0.72,0.53,"JK2 = H (> 50 % MA)",adj=0,cex=0.8)
+```
+
+
+```{r, echo=FALSE}
+##For Arlov_a (den enkeltvariabelen som er sterkest korrelert med akse 1) blant SN-relaterte variabler
+
+hist(Arlov_a)
+```
+
+
+```{r, echo=FALSE}
+par(plt=c(0.15, 0.95, 0.15, z2))
+plot(akse1,akse2,xlab="GNMDS 1 Coastal plains (KS457)",ylab="GNMDS 2 Coastal plains (KS457)",xlim=c(min(akse1)-0.01,max(akse1)+0.01),ylim=c(min(akse2)-0.01,max(akse2)+0.01),xaxp=c(-0.5,1,3),yaxp=c(-0.5,0.5,2),type="n") #Grunnlag for plotting av symboler etc.
+lines(c(-2,2),c(0,0),lty=2,col=8)
+lines(c(0,0),c(-2,2),lty=2,col=8)
+
+os <- ordisurf(ordx[,c(1,2)],Arlov_a,display="sites",levels=c(0.1,0.25,0.4,0.6,0.8), col="red",add=T) #inkluderer plotting på eksisterende ordinasjonsdiagram
+lines(c(-0.77,-0.74),c(0.535,0.535),col=2)
+text(-0.72,0.535,"Arlov_a",adj=0,cex=0.8)
+
+#Punkter ulike farger og symboler for ulike (nye) skjærgårdspreg-trinn (SN-klasser 1-4)
+
+points(akse1[SN==1],akse3[SN==1],pch=16,cex=0.5,col=1)
+points(akse1[SN==2],akse3[SN==2],pch=16,cex=0.6,col="lightblue2")
+points(akse1[SN==3],akse3[SN==3],pch=16,cex=0.75,col="darkblue")
+points(akse1[SN==4],akse3[SN==4],pch=1,cex=0.75,col="red")
+points(akse1[SN==5],akse3[SN==5],pch=16,cex=0.9,col="red")
+points(-0.75,0.49,pch=16,cex=0.5,col="black")
+text(-0.72,0.49,"SN = 1 (mainland)",adj=0,cex=0.8)
+points(-0.75,0.45,pch=16,cex=0.6,col="lightblue2")
+text(-0.72,0.45,"SN = 2",adj=0,cex=0.8)
+points(-0.75,0.41,pch=16,cex=0.75,col="darkblue")
+text(-0.72,0.41,"SN = 3",adj=0,cex=0.8)
+points(-0.75,0.37,pch=1,cex=0.75,col="red")
+text(-0.72,0.37,"SN = 4",adj=0,cex=0.8)
+points(-0.75,0.33,pch=16,cex=0.9,col="red")
+text(-0.72,0.33,"SN = 5",adj=0,cex=0.8)
+```
+
+
+```{r, echo=FALSE}
+##For Oyst_i
+
+par(plt=c(0.15, 0.95, 0.15, z2))
+plot(akse1,akse2,xlab="GNMDS 1 Coastal plains (KS457)",ylab="GNMDS 2 Coastal plains (KS457)",xlim=c(min(akse1)-0.01,max(akse1)+0.01),ylim=c(min(akse2)-0.01,max(akse2)+0.01),xaxp=c(-0.5,1,3),yaxp=c(-0.5,0.5,2),type="n") #Grunnlag for plotting av symboler etc.
+lines(c(-2,2),c(0,0),lty=2,col=8)
+lines(c(0,0),c(-2,2),lty=2,col=8)
+
+os <- ordisurf(ordx[,c(1,2)],Oyst_i,display="sites",levels=c(0.19,0.454,0.574,0.643,0.693,0.733,0.768,0.798), col="red",add=T) #inkluderer plotting på eksisterende ordinasjonsdiagram
+lines(c(-0.77,-0.74),c(0.535,0.535),col=2)
+text(-0.72,0.535,"Inverse island size (Oyst_i)",adj=0,cex=0.8)
+
+#Punkter ulike farger og symboler for ulike (nye) skjærgårdspreg-trinn (SN-klasser 1-4)
+
+points(akse1[SN==1],akse3[SN==1],pch=16,cex=0.5,col=1)
+points(akse1[SN==2],akse3[SN==2],pch=16,cex=0.6,col="lightblue2")
+points(akse1[SN==3],akse3[SN==3],pch=16,cex=0.75,col="darkblue")
+points(akse1[SN==4],akse3[SN==4],pch=1,cex=0.75,col="red")
+points(akse1[SN==5],akse3[SN==5],pch=16,cex=0.9,col="red")
+points(-0.75,0.49,pch=16,cex=0.5,col="black")
+text(-0.72,0.49,"SN = 1 (mainland)",adj=0,cex=0.8)
+points(-0.75,0.45,pch=16,cex=0.6,col="lightblue2")
+text(-0.72,0.45,"SN = 2",adj=0,cex=0.8)
+points(-0.75,0.41,pch=16,cex=0.75,col="darkblue")
+text(-0.72,0.41,"SN = 3",adj=0,cex=0.8)
+points(-0.75,0.37,pch=1,cex=0.75,col="red")
+text(-0.72,0.37,"SN = 4",adj=0,cex=0.8)
+points(-0.75,0.33,pch=16,cex=0.9,col="red")
+text(-0.72,0.33,"SN = 5",adj=0,cex=0.8)
+```
+
+
+```{r, echo=FALSE}
+par(mfrow=c(1,2))
+plot(IfI,Oyst_i)
+hist(Oyst_i[IfI==0])
+```
+
+
+
