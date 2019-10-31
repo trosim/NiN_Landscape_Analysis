@@ -1,0 +1,393 @@
+---
+title: "Landscape analysis example"
+author: "Trond Simensen"
+date: "31 10 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+---
+title: "Landscape analysis example"
+author: "Trond Simensen"
+date: "31 10 2019"
+output: html_document
+---
+
+All four axes in the 4-dimensional GNMDS ordination of the KS457 dataset were confirmed by DCA. GNMDS ordination had Procrustes SS = 0.0363 and seven unstable OUs (which switched positions between the two best GNMDS solutions).
+
+```{r, include = FALSE}
+rm(list=ls())
+setwd("C:/Users/trosim/Documents/PhD/Subproject_2/Landscape_Analysis_Git_Hub/NiN_Landscape_Analysis")
+getwd()
+
+# Loading libraries
+library (readxl)#for reading in data
+library(vegan)  #vegan 2.4.0
+library(graphics)  #for å kunne identifisere punkter på ordinasjonsdiagram
+
+
+#Importerer data(matriser)
+#Aktuelle datamatriser er: 
+
+spreadsheet_filename  <-  "KS457_Coastal_plains.xlsx" # Setting the filename to the spreadsheet containg data
+
+# Reading in data, specifying which columns to read with the command 'range'
+sheetname  <-  "KS457" # Setting the name of the sheet within the spreadsheet containing data
+
+av <- read_excel(spreadsheet_filename, sheet = sheetname, range = cell_cols("J:CO"), col_names = TRUE) #analysis variables, e.g. the 85 variables in the data; nod id's
+av  <-  as.data.frame(av)
+
+lg <- read_excel(spreadsheet_filename, sheet = sheetname, range = cell_cols("C:H"), col_names = TRUE) # placement along CLGs (affiliation to tentative major type based on the Norland project)
+lg  <-  as.data.frame(lg)
+
+nv <- read_excel(spreadsheet_filename, sheet = sheetname, range = cell_cols("CQ:CX"), col_names = TRUE) # key variables
+nv <- as.data.frame(nv)
+
+id <- read_excel(spreadsheet_filename, sheet = sheetname, range = cell_cols("A:B"), col_names = TRUE) #ID's and area
+id <- as.data.frame(id)
+
+sheetname  <-  "OrdRes" # Setting the name of the sheet within the spreadsheet containing data
+onv <- read_excel(spreadsheet_filename, sheet = sheetname, range = cell_cols("O:S"), col_names = TRUE) #rONV'er
+onv <- as.data.frame(onv)
+
+sheetname  <-  "Resk2" # Setting the name of the sheet within the spreadsheet containing data
+snv <- read_excel(spreadsheet_filename, sheet = sheetname, range = cell_cols("B:K"), col_names = TRUE) #reskalerte rONV'er (jf. regneark /resk)
+snv <- as.data.frame(snv)
+
+sheetname  <-  "JAtype" # Setting the name of the sheet within the spreadsheet containing data
+jk <- read_excel(spreadsheet_filename, sheet = sheetname, range = cell_cols("F:G"), col_names = TRUE) #jordartsklasser
+
+sheetname  <-  "OrdRes" # Setting the name of the sheet within the spreadsheet containing data
+ordx <- read_excel(spreadsheet_filename, sheet = sheetname, range = cell_cols("B:E"), col_names = TRUE) #DCA
+ordx <- as.data.frame(ordx)
+
+dca1 <- ordx[,1]
+dca2 <- ordx[,2]
+dca3 <- ordx[,3]
+dca4 <- ordx[,4]
+
+sheetname  <-  "OrdRes" # Setting the name of the sheet within the spreadsheet containing data
+ordx <- read_excel(spreadsheet_filename, sheet = sheetname, range = cell_cols("K:N"), col_names = TRUE) #GNMDS
+ordx <- as.data.frame(ordx)
+
+gnmds1 <- ordx[,1]
+gnmds2 <- ordx[,2]
+gnmds3 <- ordx[,3]
+gnmds4 <- ordx[,4]
+
+gnmds4_1 <- gnmds1
+gnmds4_2 <- gnmds2
+gnmds4_3 <- gnmds3 
+gnmds4_4 <- gnmds4
+
+akse1<-gnmds4_1
+akse2<-gnmds4_2
+akse3<-gnmds4_3
+akse4<-gnmds4_4
+
+attach(av)
+names(av)
+attach(lg)
+names(lg)
+attach(nv)
+names(nv)
+attach(id)
+names(id)
+attach(onv)
+names(onv)
+attach(snv)
+names(snv)
+attach(jk)
+names(jk)
+
+JK1 <- factor(JK1)
+JK2 <- factor(JK2)
+```
+
+
+```{r, include= FALSE}
+##### DCA #####
+par(mfrow=c(1,1))
+
+#Enkel plotting av DCA-resultater, svarte prikker:
+plot(dca1,dca2,xlab="DCA1 - Coastal plains (KS457)",ylab="DCA2 - Coastal plains (KS457)",type="n")
+```
+
+
+```{r, echo = FALSE}
+plot(dca1,dca2,xlab="DCA1 - Coastal plains (KS457)",ylab="DCA2 - Coastal plains (KS457)",pch=16)
+
+```
+
+There were no visible artifacts in the ordination charts. The correlation analysis, the vector charts and the iso-line charts show a strong first axis related to land use (infrastructure and agricultural character) that appears to be conditioned by an underlying geo-ecological gradient from inner to outer coast. Second axis is strongly related to relief.
+
+```{r, include = FALSE}
+########################################################################
+#### Tolkning av ordinasjon vha korrelasjonsanalyse og enkle tester ####
+########################################################################
+
+#### Velg akser som skal analyseres
+
+GNMDS4_1  <-  gnmds1
+GNMDS4_2  <-  gnmds2
+GNMDS4_3  <-  gnmds3
+GNMDS4_4  <-  gnmds4
+
+#######Beregning av Kendall's tau mellom en ordinasjonsakse eller variabel og analysevariablene#######
+
+ax <- gnmds1 #Bestem akse
+env.var <- av #Bestem miljøvariabelmatrise
+
+p.val <- NULL #create empty objects for the p.values
+tau.val <- NULL #creates empty object for the t-values.
+p <- NULL
+
+for(i in 1:4) # A Loop that calculates Kendall's tau and p-values for all the correlations tests.
+{
+	z <- cor.test(ax,env.var[,i], method="k")
+	p.val[i] <- round(z$p.value, digits=5)
+	tau.val[i] <- round(z$estimate,digits=5)
+	if (p.val[i] < 0.05) #prints a star when the p-value is less than 0.05
+	{p[i] <- "###"
+      	}else{
+  	p[i] <- " "}
+}
+#p.val
+#tau.val
+(test.summary.ax = data.frame(cbind(names(env.var),p.val,tau.val,p)))
+corr.matrise1 <- as.data.frame(test.summary.ax [,c(1,3)])
+names(corr.matrise1) <- c("Landscape variable", "GNMDS 1" )
+
+##
+ax <- gnmds2 #Bestem akse
+env.var <- av #Bestem miljøvariabelmatrise
+
+p.val <- NULL #create empty objects for the p.values
+tau.val <- NULL #creates empty object for the t-values.
+p <- NULL
+
+for(i in 1:4) # A Loop that calculates Kendall's tau and p-values for all the correlations tests.
+{
+	z <- cor.test(ax,env.var[,i], method="k")
+	p.val[i] <- round(z$p.value, digits=5)
+	tau.val[i] <- round(z$estimate,digits=5)
+	if (p.val[i] < 0.05) #prints a star when the p-value is less than 0.05
+	{p[i] <- "###"
+      	}else{
+  	p[i] <- " "}
+}
+#p.val
+#tau.val
+(test.summary.ax = data.frame(cbind(names(env.var),p.val,tau.val,p)))
+corr.matrise2 <- as.data.frame(test.summary.ax [,3])
+names(corr.matrise2) <- c("GNMDS 2" )
+
+##
+ax <- gnmds3 #Bestem akse
+env.var <- av #Bestem miljøvariabelmatrise
+
+p.val <- NULL #create empty objects for the p.values
+tau.val <- NULL #creates empty object for the t-values.
+p <- NULL
+
+for(i in 1:4) # A Loop that calculates Kendall's tau and p-values for all the correlations tests.
+{
+	z <- cor.test(ax,env.var[,i], method="k")
+	p.val[i] <- round(z$p.value, digits=5)
+	tau.val[i] <- round(z$estimate,digits=5)
+	if (p.val[i] < 0.05) #prints a star when the p-value is less than 0.05
+	{p[i] <- "###"
+      	}else{
+  	p[i] <- " "}
+}
+#p.val
+#tau.val
+(test.summary.ax = data.frame(cbind(names(env.var),p.val,tau.val,p)))
+corr.matrise3 <- as.data.frame(test.summary.ax [,3])
+names(corr.matrise3) <- c("GNMDS 3" )
+
+##
+ax <- gnmds4 #Bestem akse
+env.var <- av #Bestem miljøvariabelmatrise
+
+p.val <- NULL #create empty objects for the p.values
+tau.val <- NULL #creates empty object for the t-values.
+p <- NULL
+
+for(i in 1:4) # A Loop that calculates Kendall's tau and p-values for all the correlations tests.
+{
+	z <- cor.test(ax,env.var[,i], method="k")
+	p.val[i] <- round(z$p.value, digits=5)
+	tau.val[i] <- round(z$estimate,digits=5)
+	if (p.val[i] < 0.05) #prints a star when the p-value is less than 0.05
+	{p[i] <- "###"
+      	}else{
+  	p[i] <- " "}
+}
+#p.val
+#tau.val
+(test.summary.ax = data.frame(cbind(names(env.var),p.val,tau.val,p)))
+corr.matrise4 <- as.data.frame(test.summary.ax [,3])
+names(corr.matrise4) <- c("GNMDS 4" )
+###
+
+#Combining values to a dataframe
+corr.matrise <- cbind(corr.matrise1, corr.matrise2, corr.matrise3, corr.matrise4)
+```
+
+
+```{r, echo= FALSE}
+knitr::kable(
+  corr.matrise, 
+  caption = "Correlation between landscape variables and ordination-axes"
+)
+
+```
+
+```{r, cache = TRUE, include=FALSE}
+##################################################
+#### Standardskript for ordinasjonsdiagrammer ####
+##################################################
+
+#### Generelt ordinasjonsdiagrammer med like enheter på begge aksene ####
+
+#Bestemmer gradientlengdene for akse 1, 2 og 3 og 4
+grl1 <- max(akse1)-min(akse1)
+grl2 <- max(akse2)-min(akse2)
+grl3 <- max(akse3)-min(akse3)
+grl4 <- max(akse4)-min(akse4)
+grl1
+grl2
+grl3
+grl4
+
+#Diagram for akse 1 mot akse 2
+#Vil finne koordinatene for hjørner i det 'plotteområdet' med koordinater (x1, x2, y1, y2) som gir
+#like enheter på begge akser. Vi holder x1, x2 og y1 faste og bestemmer y2 slik at (x2-x1)/(y2-y1) i plt=c(x1,x2,y1,y2)
+#blir lik grl1/grl2
+#Det krever at y2 = [(x2-x1)*grl2 + y1*grl1]/grl1 
+#Setter vi x1, x2 og y1 konstante, får vi:
+y2 <- (0.8*grl2+0.15*grl1)/grl1
+y2
+
+#Diagram for akse 1 mot akse 3
+#Vil finne koordinatene for hjørner i det 'plotteområdet' med koordinater (x1, x2, z1, z2) som gir
+#like enheter på begge akser. Vi holder x1, x2 og z1 faste og bestemmer z2 slik at (x2-x1)/(z2-z1) i plt=c(x1,x2,z1,z2)
+#blir lik grl1/grl3
+#Det krever at z2 = [(x2-x1)*grl3 + z1*grl1]/grl1 
+#Setter vi x1, x2 og z1 konstante, får vi:
+z2 <- (0.8*grl3+0.15*grl1)/grl1
+z2
+
+#Diagram for akse 1 mot akse 4
+#Vil finne koordinatene for hjørner i det 'plotteområdet' med koordinater (x1, x2, w1, w2) som gir
+#like enheter på begge akser. Vi holder x1, x2 og w1 faste og bestemmer w2 slik at (x2-x1)/(w2-w1) i plt=c(x1,x2,w1,w2)
+#blir lik grl1/grl4
+#Det krever at w2 = [(x2-x1)*grl3 + w1*grl1]/grl1 
+#Setter vi x1, x2 og w1 konstante, får vi:
+w2 <- (0.8*grl4+0.15*grl1)/grl1
+w2
+```
+
+
+```{r, cache = TRUE, include=FALSE}
+par(mfrow=c(1,1))
+
+#Tegner diagrammet for aksene 1 og 2
+par(plt=c(0.15, 0.95, 0.15, y2))
+plot(akse1,akse2,xlab="GNMDS 1 Coastal plains (KS457)",ylab="GNMDS 2 Coastal plains (KS457)",xlim=c(min(akse1)-0.01,max(akse1)+0.01),ylim=c(min(akse2)-0.01,max(akse2)+0.01),xaxp=c(-0.5,1,3),yaxp=c(-0.5,0.5,2),type="n") #Grunnlag for plotting av symboler etc.
+points(akse1,akse2,pch=16,cex=0.75)
+lines(c(-2,2),c(0,0),lty=2,col=8)
+lines(c(0,0),c(-2,2),lty=2,col=8)
+
+##Vektorer for nøkkelvariabler, med envfit, diagrammet for akse 1 og 2; merk at r2 er squared Pearson's 
+
+#Setter sammen de aktuelle aksene til en dataramme
+ordx <- data.frame(akse1, akse2, akse3, akse4)
+is.data.frame(ordx)
+dim(ordx)
+
+#Samler aktuelle nøkkelvariabler + 'surrogater' i ei dataramme
+nvxOI <- data.frame(Gab_a,IfI,Lled_a,Vei_b_a,Sefr_a,Cul_a_s,Abygg_a)
+nvxOI
+nvxJP <- data.frame(Arfull_a,JI)
+nvxJP
+nvxSN <- data.frame(Arlov_a,Arbar_a,Land_a,Arbla_a,R_net_a,Kbf_a,Oyst_i,Ekspve_a)
+nvxSN
+nvxIP <- data.frame(Inns_s,II)
+nvxIP
+nvxMP <- data.frame(MI)
+nvxMP
+nvxX <- data.frame(Sn_torr,Sn_frisk,Sn_flekk,Bohei_a,Araaf_a,Kskred_a)
+nvxX
+nvx3 <- data.frame(IfI,Arfull_a,Oyst_i,RR1)
+nvx3
+nvxRR <- data.frame(RR1, Cre_f_a, Cre_f_a, Flat_a, Tpi1h_a, Tpi1l_a, Rug3_m, Guro_t_a)
+nvxRR
+
+#Beregner envfit-vektorer
+ordvek12OI <- envfit(ordx[,1:2], nvxOI, permutations = 999)
+ordvek12JP <- envfit(ordx[,1:2], nvxJP, permutations = 999)
+ordvek12SN <- envfit(ordx[,1:2], nvxSN, permutations = 999)
+ordvek12RR <- envfit(ordx[,1:2], nvxRR, permutations = 999)
+
+ordvek12OI$vectors$arrows #gir koordinater for vektorpilenes hoder, standardisert til lengde = 1
+ordvek12OI$vectors$r #gir r-squared for variablene
+ordvek12OI #gir begge deler, skrevet ut i tabell
+ordvek12JP #gir begge deler, skrevet ut i tabell
+ordvek12SN #gir begge deler, skrevet ut i tabell
+ordvek12RR #gir begge deler, skrevet ut i tabell
+
+ordvek13IP <- envfit(ordx[,c(1,3)], nvxIP, permutations = 999)
+ordvek13IP #gir begge deler, skrevet ut i tabell
+ordvek13MP <- envfit(ordx[,c(1,3)], nvxMP, permutations = 999)
+ordvek13MP
+ordvek13X <- envfit(ordx[,c(1,3)], nvxX, permutations = 999)
+ordvek13X
+ordvek133 <- envfit(ordx[,c(1,3)], nvx3, permutations = 999)
+ordvek133
+```
+
+
+```{r, cache = TRUE, echo=FALSE}
+
+#Tegner diagrammet for aksene 1 og 2
+par(plt=c(0.25, 0.95, 0.15, y2))
+plot(akse1,akse2,xlab="GNMDS 1 Coastal plains (KS457)",ylab="GNMDS 2 Coastal plains (KS457)",xlim=c(min(akse1)-0.01,max(akse1)+0.01),ylim=c(min(akse2)-0.01,max(akse2)+0.01),xaxp=c(-0.5,1,3),yaxp=c(-0.5,0.5,2),type="n") #Grunnlag for plotting av symboler etc.
+points(akse1,akse2,pch=16,cex=0.75)
+lines(c(-2,2),c(0,0),lty=2,col=8)
+lines(c(0,0),c(-2,2),lty=2,col=8)
+
+#Plotter vektorpiler på standardordinasjonsdiagrammene med kommandoene:
+plot(ordvek12OI,arrow.mul=.58,col="brown",add=T,cex=0.8)
+plot(ordvek12JP,arrow.mul=.58,col="green3",add=T,cex=0.8)
+plot(ordvek12SN,arrow.mul=.58,col="blue3",add=T,cex=0.8)
+
+```
+
+```{r, cache = TRUE, echo=FALSE}
+
+#Tegner diagrammet for aksene 1 og 2
+par(plt=c(0.15, 0.95, 0.15, y2))
+plot(akse1,akse2,xlab="GNMDS 1 Coastal plains (KS457)",ylab="GNMDS 2 Coastal plains (KS457)",xlim=c(min(akse1)-0.01,max(akse1)+0.01),ylim=c(min(akse2)-0.01,max(akse2)+0.01),xaxp=c(-0.5,1,3),yaxp=c(-0.5,0.5,2),type="n") #Grunnlag for plotting av symboler etc.
+points(akse1,akse2,pch=16,cex=0.75)
+lines(c(-2,2),c(0,0),lty=2,col=8)
+lines(c(0,0),c(-2,2),lty=2,col=8)
+
+#Plotter vektorpiler på standardordinasjonsdiagrammene med kommandoene:
+plot(ordvek12RR,arrow.mul=.49,col="darkviolet",add=T,cex=0.8)
+plot(ordvek133,arrow.mul=.61,col="black",add=T,cex=0.6)
+
+```
+
+Complementary observations, axis 1 and 2:
+- One OU belongs to OI Class 6 (big city). This is Id 2916 Oslo city, which occupies the extreme position along GNMDS axis 1.
+- Agricultural intensity is associated with positive scores for GNMDS 1, and a certain degree of infrastructure (similar to IfI ≈ 4) is a prerequisite for amount/degree of agricultural land use intensity. The relationship between JI and IfI is slightly unimodal, that is, the agricultural land use intensity is strongest when the amount/degree of infrastructure is relatively high, but decreases again when the amount/degree of infrastructure is very high.
+- The proportion of the area with deciduous forest (Arlov_a) is 0 at the outer parts of the archipelago (SN = 5; there are 156 OUs with Arlov = 0), but increases inward towards larger islands and on the mainland.
+- The figure at the bottom left shows a clear (inverse) island size gradient, with a considerable variation in landscape characteristics related to the archipelago properties, first and foremost when the islands are smaller than 100 km2 (Oyst_i > 0.643). This opens the possibility that the complex gradient expressed on axis 1 is actually composed of two CLGs.
+- Among the 69 OUs in KS lacking infrastructure (IfI = 0), all of the 56 as a largest island smaller than 1 km. Islands with significant infrastructure are generally much larger; one exception is Id 4038 which has Oyst_i = 0.8647 and IfI = 9.34. This polygon is located on the west and south part of Nøtterøy.
+- It is noteworthy that the topographic variables give such a strong signal when there is so little topography variation within costal plains.
+
