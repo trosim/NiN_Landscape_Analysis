@@ -368,6 +368,8 @@ plot(ordvek12SN,arrow.mul=.58,col="blue3",add=T,cex=0.8)
 
 ```
 
+# Interpretation
+
 ```{r, cache = TRUE, echo=FALSE}
 
 #Tegner diagrammet for aksene 1 og 2
@@ -383,13 +385,18 @@ plot(ordvek133,arrow.mul=.61,col="black",add=T,cex=0.6)
 
 ```
 
+## Header 2
+
 Complementary observations, axis 1 and 2:
-- One OU belongs to OI Class 6 (big city). This is Id 2916 Oslo city, which occupies the extreme position along GNMDS axis 1.
-- Agricultural intensity is associated with positive scores for GNMDS 1, and a certain degree of infrastructure (similar to IfI ≈ 4) is a prerequisite for amount/degree of agricultural land use intensity. The relationship between JI and IfI is slightly unimodal, that is, the agricultural land use intensity is strongest when the amount/degree of infrastructure is relatively high, but decreases again when the amount/degree of infrastructure is very high.
-- The proportion of the area with deciduous forest (Arlov_a) is 0 at the outer parts of the archipelago (SN = 5; there are 156 OUs with Arlov = 0), but increases inward towards larger islands and on the mainland.
-- The figure at the bottom left shows a clear (inverse) island size gradient, with a considerable variation in landscape characteristics related to the archipelago properties, first and foremost when the islands are smaller than 100 km2 (Oyst_i > 0.643). This opens the possibility that the complex gradient expressed on axis 1 is actually composed of two CLGs.
-- Among the 69 OUs in KS lacking infrastructure (IfI = 0), all of the 56 as a largest island smaller than 1 km. Islands with significant infrastructure are generally much larger; one exception is Id 4038 which has Oyst_i = 0.8647 and IfI = 9.34. This polygon is located on the west and south part of Nøtterøy.
-- It is noteworthy that the topographic variables give such a strong signal when there is so little topography variation within costal plains.
+
+***
+
+* One OU belongs to OI Class 6 (big city). This is Id 2916 Oslo city, which occupies the extreme position along GNMDS axis 1.
+* Agricultural intensity is associated with positive scores for GNMDS 1, and a certain degree of infrastructure (similar to IfI ≈ 4) is a prerequisite for amount/degree of agricultural land use intensity. The relationship between JI and IfI is slightly unimodal, that is, the agricultural land use intensity is strongest when the amount/degree of infrastructure is relatively high, but decreases again when the amount/degree of infrastructure is very high.
+* The proportion of the area with deciduous forest (Arlov_a) is 0 at the outer parts of the archipelago (SN = 5; there are 156 OUs with Arlov = 0), but increases inward towards larger islands and on the mainland.
+* The figure at the bottom left shows a clear (inverse) island size gradient, with a considerable variation in landscape characteristics related to the archipelago properties, first and foremost when the islands are smaller than 100 km2 (Oyst_i > 0.643). This opens the possibility that the complex gradient expressed on axis 1 is actually composed of two CLGs.
+* Among the 69 OUs in KS lacking infrastructure (IfI = 0), all of the 56 as a largest island smaller than 1 km. Islands with significant infrastructure are generally much larger; one exception is Id 4038 which has Oyst_i = 0.8647 and IfI = 9.34. This polygon is located on the west and south part of Nøtterøy.
+* It is noteworthy that the topographic variables give such a strong signal when there is so little topography variation within costal plains.
 
 ```{r, echo=FALSE}
 ###Figurer med isolinjer på ordinasjonsdiagrammet (Ordisurf); akser 1 mot 2.
