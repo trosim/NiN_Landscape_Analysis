@@ -2,7 +2,7 @@
 title: "Landscape analysis example"
 author: "Trond Simensen"
 date: "31 10 2019"
-output: html_document
+output: github_document
 ---
 
 ```{r setup, include=FALSE}
