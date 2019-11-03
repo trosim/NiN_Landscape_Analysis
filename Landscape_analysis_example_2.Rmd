@@ -1,7 +1,7 @@
 ---
 title: "Landscape analysis example"
 author: "Trond Simensen"
-date: "31 10 2019"
+date: "03 11 2019"
 output: github_document
 ---
 
@@ -16,17 +16,22 @@ date: "31 10 2019"
 output: html_document
 ---
 
+### Analysis of variation of landscape properties 
+# Coastal plains
+
 All four axes in the 4-dimensional GNMDS ordination of the KS457 dataset were confirmed by DCA. GNMDS ordination had Procrustes SS = 0.0363 and seven unstable OUs (which switched positions between the two best GNMDS solutions).
 
 ```{r, include = FALSE}
 rm(list=ls())
-setwd("C:/Users/trosim/Documents/PhD/Subproject_2/Landscape_Analysis_Git_Hub/NiN_Landscape_Analysis")
-getwd()
+#setwd("C:/Users/trosim/Documents/PhD/Subproject_2/Landscape_Analysis_Git_Hub/NiN_Landscape_Analysis")
+#getwd()
 
 # Loading libraries
 library (readxl)#for reading in data
 library(vegan)  #vegan 2.4.0
 library(graphics)  #for å kunne identifisere punkter på ordinasjonsdiagram
+library(knitr)
+library(formattable)
 
 
 #Importerer data(matriser)
@@ -149,7 +154,7 @@ for(i in 1:4) # A Loop that calculates Kendall's tau and p-values for all the co
 {
 	z <- cor.test(ax,env.var[,i], method="k")
 	p.val[i] <- round(z$p.value, digits=5)
-	tau.val[i] <- round(z$estimate,digits=5)
+	tau.val[i] <- round(z$estimate,digits=4)
 	if (p.val[i] < 0.05) #prints a star when the p-value is less than 0.05
 	{p[i] <- "###"
       	}else{
@@ -173,7 +178,7 @@ for(i in 1:4) # A Loop that calculates Kendall's tau and p-values for all the co
 {
 	z <- cor.test(ax,env.var[,i], method="k")
 	p.val[i] <- round(z$p.value, digits=5)
-	tau.val[i] <- round(z$estimate,digits=5)
+	tau.val[i] <- round(z$estimate,digits=4)
 	if (p.val[i] < 0.05) #prints a star when the p-value is less than 0.05
 	{p[i] <- "###"
       	}else{
@@ -197,7 +202,7 @@ for(i in 1:4) # A Loop that calculates Kendall's tau and p-values for all the co
 {
 	z <- cor.test(ax,env.var[,i], method="k")
 	p.val[i] <- round(z$p.value, digits=5)
-	tau.val[i] <- round(z$estimate,digits=5)
+	tau.val[i] <- round(z$estimate,digits=4)
 	if (p.val[i] < 0.05) #prints a star when the p-value is less than 0.05
 	{p[i] <- "###"
       	}else{
@@ -221,7 +226,7 @@ for(i in 1:4) # A Loop that calculates Kendall's tau and p-values for all the co
 {
 	z <- cor.test(ax,env.var[,i], method="k")
 	p.val[i] <- round(z$p.value, digits=5)
-	tau.val[i] <- round(z$estimate,digits=5)
+	tau.val[i] <- round(z$estimate,digits=4)
 	if (p.val[i] < 0.05) #prints a star when the p-value is less than 0.05
 	{p[i] <- "###"
       	}else{
@@ -242,47 +247,33 @@ corr.matrise$GNMDS3 <-  as.numeric(levels(corr.matrise$GNMDS3)[corr.matrise$GNMD
 corr.matrise$GNMDS4 <-  as.numeric(levels(corr.matrise$GNMDS4)[corr.matrise$GNMDS4])
 ```
 
-
-```{r, echo= FALSE}
-knitr::kable(
-  corr.matrise, 
-  caption = "Correlation between landscape variables and ordination-axes"
-)
-
-```
-
 ```{r}
-library(flextable)
+Description <- c("No commercial buildings", "No fisheries-related buildings", "PA built-up", "PA flat terrain", "PA regulated magazine", "PA road", "PA thick layer of till", "PA depressions", "PA convex terrain", "Terrain form TPI1, numerical, mean", "PA strong ocean current", "PA normal ocean current", "PA weak ocean current", "PA large river", "PA trail, path", "PA steep terrain/slope", "PA landslide soil", "No summer mountain pasture", "PA old buildings", "Terrain ruggedness VRM3, mean", "Altitudinal range", "PA lime-rich bedrock", "PA lime-poor bedrock geology", "PA reindeer husbandry facilities", "PA plutonic rock", "PA volcanic rock", "PA sedimentary rock", "PA metamorphic rock", "PA terrestrial area", "PA built-up area", "PA town/city area", "PA mire", "PA moderate slope", "No marine islands", "PA marine deposits", "PA power lines", "PA lacustrine deposits", "PA glaciofluvial deposits", "PA exposed bedrock", "PA freshwater lake", "No freshwater lake islands", "Hydrographic index, ER, mean", "PA river", "PA exposed coast", "PA sligyhtly exposed coast", "PA slightly protected coast", "No lakes", "No cultural heritage sites outdoors", "No technical heritage sites", "No marine cultural heritage sites", "No church ruins", "No ancient rock art sites", "No archeological heritage sites", "PA steep coast", "PA flat coast", "Coastal ruggedness, VRM3, mean", "Coastal ruggedness, coarse scale, VRM9, mean", "PA rugged coast", "PA smooth/flat coast", "Coastal complexity", "PA complex coastline", "PA simple coastline Gab_fi", "PA boreal heaths", "PA south facing terrain", "PA north facing terrain", "PA large buildings", "PA open areas", "PA coniferous forest", "PA mixed boreal forest", "PA arable land", "PA deciduous forest", "PA surface cultivated land", "Distance to mire, mean", "Distance to lake, mean", "Distance to coast, mean", "PA rugged terrain", "PA rugged terrain, TPI6", "PA impediment", "PA patchy open treeless area", "PA lichen heath", "PA dry heath/open areas", "PA moist/fresh heath/open areas", "PA unregistered heath/open areas", "Inverse island size")
 
-corr <- flextable(
-  corr.matrise)
-
-corr <- color(corr, ~ GNMDS1 < -0.5, ~ GNMDS1, color = "blue")
-corr <- bold(corr, ~ GNMDS1 < -0.7, ~ GNMDS1, bold = TRUE)
-corr <- color(corr, ~ GNMDS1 > 0.5, ~ GNMDS1, color = "red")
-corr <- bold(corr, ~ GNMDS1 > 0.7, ~ GNMDS1, bold = TRUE)
-
-corr <- color(corr, ~ GNMDS2 < -0.5, ~ GNMDS2, color = "blue")
-corr <- bold(corr, ~ GNMDS2 < -0.7, ~ GNMDS2, bold = TRUE)
-corr <- color(corr, ~ GNMDS2 > 0.5, ~ GNMDS2, color = "red")
-corr <- bold(corr, ~ GNMDS2 > 0.7, ~ GNMDS2, bold = TRUE)
-
-corr <- color(corr, ~ GNMDS3 < -0.5, ~ GNMDS3, color = "blue")
-corr <- bold(corr, ~ GNMDS3 < -0.7, ~ GNMDS3, bold = TRUE)
-corr <- color(corr, ~ GNMDS3 > 0.5, ~ GNMDS3, color = "red")
-corr <- bold(corr, ~ GNMDS3 > 0.7, ~ GNMDS3, bold = TRUE)
-
-corr <- color(corr, ~ GNMDS4 < -0.5, ~ GNMDS4, color = "blue")
-corr <- bold(corr, ~ GNMDS4 < -0.7, ~ GNMDS4, bold = TRUE)
-corr <- color(corr, ~ GNMDS4 > 0.5, ~ GNMDS4, color = "red")
-corr <- bold(corr, ~ GNMDS4 > 0.7, ~ GNMDS4, bold = TRUE)
-
-autofit(corr)
-
-corr
-
+corr.matrise <- cbind(corr.matrise, Description)
+corr.matrise <- corr.matrise [ , c(1,6,2:5)]
 ```
 
+```{r, echo = FALSE}
+significance_formatter <- 
+  formatter("span", 
+            style = x ~ style(
+            font.weight = ifelse(x <= -0.5 | x >= 0.5, "bold", "plain"),
+              color = ifelse( x <= -0.5, "brown", 
+                            ifelse(x <= -0.1, "red", 
+                                   ifelse(x >= 0.5, "brown", 
+                                          ifelse(x >= 0.3, "red", 
+                                                 "black"))))))
+
+formattable(corr.matrise, align =c("l","l","c","c","c", "c"), list(
+  `Indicator Name` = 
+    formatter("span", style = ~ style(color = "grey",font.weight = "bold")), 
+    `GNMDS1` = significance_formatter, 
+    `GNMDS2` = significance_formatter,
+    `GNMDS3` = significance_formatter,
+    `GNMDS4` = significance_formatter
+))
+```
 
 ```{r, cache = TRUE, include=FALSE}
 ##################################################
@@ -392,7 +383,7 @@ ordvek133
 ```{r, cache = TRUE, echo=FALSE}
 
 #Tegner diagrammet for aksene 1 og 2
-par(plt=c(0.25, 0.95, 0.15, y2))
+par(plt=c(0.15, 0.95, 0.15, y2))
 plot(akse1,akse2,xlab="GNMDS 1 Coastal plains (KS457)",ylab="GNMDS 2 Coastal plains (KS457)",xlim=c(min(akse1)-0.01,max(akse1)+0.01),ylim=c(min(akse2)-0.01,max(akse2)+0.01),xaxp=c(-0.5,1,3),yaxp=c(-0.5,0.5,2),type="n") #Grunnlag for plotting av symboler etc.
 points(akse1,akse2,pch=16,cex=0.75)
 lines(c(-2,2),c(0,0),lty=2,col=8)
@@ -404,8 +395,6 @@ plot(ordvek12JP,arrow.mul=.58,col="green3",add=T,cex=0.8)
 plot(ordvek12SN,arrow.mul=.58,col="blue3",add=T,cex=0.8)
 
 ```
-
-# Interpretation
 
 ```{r, cache = TRUE, echo=FALSE}
 
@@ -422,11 +411,7 @@ plot(ordvek133,arrow.mul=.61,col="black",add=T,cex=0.6)
 
 ```
 
-## Header 2
-
-Complementary observations, axis 1 and 2:
-
-***
+#### Complementary observations, axis 1 and 2:
 
 * One OU belongs to OI Class 6 (big city). This is Id 2916 Oslo city, which occupies the extreme position along GNMDS axis 1.
 * Agricultural intensity is associated with positive scores for GNMDS 1, and a certain degree of infrastructure (similar to IfI ≈ 4) is a prerequisite for amount/degree of agricultural land use intensity. The relationship between JI and IfI is slightly unimodal, that is, the agricultural land use intensity is strongest when the amount/degree of infrastructure is relatively high, but decreases again when the amount/degree of infrastructure is very high.
@@ -475,7 +460,7 @@ text(-0.72,0.29,"OI = 6",adj=0,cex=0.8)
 ```{r, echo=FALSE}
 ##For Arfull_a med JP (akser 1 og 2)
 par(mfrow=c(1,2))
-hist(Arfull_a)
+hist(Arfull_a, main = " ")
 plot(IfI,JI)
 ```
 
@@ -506,7 +491,7 @@ text(-0.72,0.41,"JP = 3",adj=0,cex=0.8)
 ```{r, echo=FALSE}
 ##For JI med JP (akser 1 og 2)
 
-hist(JI)
+hist(JI,  main = " ")
 ```
 
 
@@ -560,7 +545,7 @@ text(-0.72,0.53,"JK2 = H (> 50 % MA)",adj=0,cex=0.8)
 ```{r, echo=FALSE}
 ##For Arlov_a (den enkeltvariabelen som er sterkest korrelert med akse 1) blant SN-relaterte variabler
 
-hist(Arlov_a)
+hist(Arlov_a,  main = " ")
 ```
 
 
