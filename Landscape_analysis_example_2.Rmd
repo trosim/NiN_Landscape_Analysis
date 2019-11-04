@@ -150,7 +150,7 @@ p.val <- NULL #create empty objects for the p.values
 tau.val <- NULL #creates empty object for the t-values.
 p <- NULL
 
-for(i in 1:4) # A Loop that calculates Kendall's tau and p-values for all the correlations tests.
+for(i in 1:84) # A Loop that calculates Kendall's tau and p-values for all the correlations tests.
 {
 	z <- cor.test(ax,env.var[,i], method="k")
 	p.val[i] <- round(z$p.value, digits=5)
@@ -174,7 +174,7 @@ p.val <- NULL #create empty objects for the p.values
 tau.val <- NULL #creates empty object for the t-values.
 p <- NULL
 
-for(i in 1:4) # A Loop that calculates Kendall's tau and p-values for all the correlations tests.
+for(i in 1:84) # A Loop that calculates Kendall's tau and p-values for all the correlations tests.
 {
 	z <- cor.test(ax,env.var[,i], method="k")
 	p.val[i] <- round(z$p.value, digits=5)
@@ -198,7 +198,7 @@ p.val <- NULL #create empty objects for the p.values
 tau.val <- NULL #creates empty object for the t-values.
 p <- NULL
 
-for(i in 1:4) # A Loop that calculates Kendall's tau and p-values for all the correlations tests.
+for(i in 1:84) # A Loop that calculates Kendall's tau and p-values for all the correlations tests.
 {
 	z <- cor.test(ax,env.var[,i], method="k")
 	p.val[i] <- round(z$p.value, digits=5)
@@ -222,7 +222,7 @@ p.val <- NULL #create empty objects for the p.values
 tau.val <- NULL #creates empty object for the t-values.
 p <- NULL
 
-for(i in 1:4) # A Loop that calculates Kendall's tau and p-values for all the correlations tests.
+for(i in 1:84) # A Loop that calculates Kendall's tau and p-values for all the correlations tests.
 {
 	z <- cor.test(ax,env.var[,i], method="k")
 	p.val[i] <- round(z$p.value, digits=5)
@@ -247,7 +247,7 @@ corr.matrise$GNMDS3 <-  as.numeric(levels(corr.matrise$GNMDS3)[corr.matrise$GNMD
 corr.matrise$GNMDS4 <-  as.numeric(levels(corr.matrise$GNMDS4)[corr.matrise$GNMDS4])
 ```
 
-```{r}
+```{r, include= FALSE}
 Description <- c("No commercial buildings", "No fisheries-related buildings", "PA built-up", "PA flat terrain", "PA regulated magazine", "PA road", "PA thick layer of till", "PA depressions", "PA convex terrain", "Terrain form TPI1, numerical, mean", "PA strong ocean current", "PA normal ocean current", "PA weak ocean current", "PA large river", "PA trail, path", "PA steep terrain/slope", "PA landslide soil", "No summer mountain pasture", "PA old buildings", "Terrain ruggedness VRM3, mean", "Altitudinal range", "PA lime-rich bedrock", "PA lime-poor bedrock geology", "PA reindeer husbandry facilities", "PA plutonic rock", "PA volcanic rock", "PA sedimentary rock", "PA metamorphic rock", "PA terrestrial area", "PA built-up area", "PA town/city area", "PA mire", "PA moderate slope", "No marine islands", "PA marine deposits", "PA power lines", "PA lacustrine deposits", "PA glaciofluvial deposits", "PA exposed bedrock", "PA freshwater lake", "No freshwater lake islands", "Hydrographic index, ER, mean", "PA river", "PA exposed coast", "PA sligyhtly exposed coast", "PA slightly protected coast", "No lakes", "No cultural heritage sites outdoors", "No technical heritage sites", "No marine cultural heritage sites", "No church ruins", "No ancient rock art sites", "No archeological heritage sites", "PA steep coast", "PA flat coast", "Coastal ruggedness, VRM3, mean", "Coastal ruggedness, coarse scale, VRM9, mean", "PA rugged coast", "PA smooth/flat coast", "Coastal complexity", "PA complex coastline", "PA simple coastline Gab_fi", "PA boreal heaths", "PA south facing terrain", "PA north facing terrain", "PA large buildings", "PA open areas", "PA coniferous forest", "PA mixed boreal forest", "PA arable land", "PA deciduous forest", "PA surface cultivated land", "Distance to mire, mean", "Distance to lake, mean", "Distance to coast, mean", "PA rugged terrain", "PA rugged terrain, TPI6", "PA impediment", "PA patchy open treeless area", "PA lichen heath", "PA dry heath/open areas", "PA moist/fresh heath/open areas", "PA unregistered heath/open areas", "Inverse island size")
 
 corr.matrise <- cbind(corr.matrise, Description)
@@ -614,7 +614,7 @@ text(-0.72,0.33,"SN = 5",adj=0,cex=0.8)
 ```{r, echo=FALSE}
 par(mfrow=c(1,2))
 plot(IfI,Oyst_i)
-hist(Oyst_i[IfI==0])
+hist(Oyst_i[IfI==0], main= " ")
 ```
 
 
