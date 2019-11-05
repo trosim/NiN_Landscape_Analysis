@@ -2,7 +2,7 @@
 title: "Landscape analysis example"
 author: "Trond Simensen"
 date: "03 11 2019"
-output: github_document
+output: html_document
 ---
 
 ```{r setup, include=FALSE}
@@ -705,6 +705,9 @@ voG1a <- rda(av~RR1,scale=T)
 voG1a
 tvoG1a <- permutest(voG1a,permutations=9999)
 tvoG1a
+```
+
+
 voG1b <- rda(av~Crug9_m,scale=T)
 voG1b
 tvoG1b <- permutest(voG1b,permutations=9999)
@@ -1249,6 +1252,184 @@ voGUA2 <- rda(av~Arfull_a+Arover_a+Condition(Arlov_a+Arbla_a+R_net_a+Ekspve_a+Oy
 voGUA2
 tvoGUA2 <- permutest(voGUA2,permutations=99)
 tvoGUA2
+
+```{r}
+library(goeveg)
+library(vegan)
+
+palette(c("#a6cee3", "#1f78b4", "#b2df8a", "#33a02c", "#fb9a99", "#e31a1c", 
+                    "#fdbf6f", "#ff7f00", "#cab2d6", "#6a3d9a", "#ffff99", "#b15928"))
+#rgb( ramp(seq(0, 1, length = 5)), max = 255)
+
+specresponse2 <- function(species, var, main, xlab, model = "auto", method = "env", axis = 1, points = FALSE, bw = FALSE) {
+  
+  if(!is.data.frame(species)) {
+    
+    if(missing(main)) {
+      main <- deparse(substitute(species))
+    }
+    
+    specnames <- deparse(substitute(species))
+    species <- data.frame(species)
+    ismat <- F
+    
+  } else {
+    if(missing(main)) {
+      main <- " "
+    }
+    specnames <- names(species)
+    ismat <- T
+  }
+  
+  species <- decostand(species, method = "pa")
+  
+  if(length(species) >= 1) {
+    
+    ls <- length(species)
+    
+    if(method == "env") {
+      
+      if(missing(xlab)) {
+        xlab <- deparse(substitute(var))
+      }
+    } else if(method == "ord") {
+      
+      # Extract site scores from ordination
+      var <- as.numeric(scores(var, display="sites", choices=axis))
+      
+      # X-axis labeling
+      if(missing(xlab)) {
+        xlab <- paste("Axis", axis, "sample scores")
+      }
+    } else {
+      stop("Method unknown.")
+    }
+    
+    plot(var, species[,1], main = main, type="n", frame = FALSE, 
+         xlab = xlab, ylab="Probability of occurrence", ylim = c(0,1))
+    
+    for(i in 1:ls) {
+      
+      if(length(species[species[,i]>0,i]) <= 5) {
+        # tried warning instead of print
+        warning(paste("Only", length(species[species[,i]>0,i]), "occurrences of", names(species)[i], "."))
+      }
+      
+      if(model == "unimodal") {
+        
+        specresponse <- suppressWarnings(glm(species[,i] ~ poly(var, 2),
+                                             family="binomial"))
+        
+      } else if (model == "linear") {
+        
+        specresponse <- suppressWarnings(glm(species[,i] ~ var,
+                                             family="binomial"))
+        
+      } else if (model == "bimodal") {
+        
+        specresponse <- suppressWarnings(glm(species[,i] ~ poly(var, 4),
+                                             family="binomial"))
+        
+      }
+      else if (model == "auto") {
+        
+        glm.1 <- suppressWarnings(glm(species[,i] ~ poly(var, 1), family="binomial"))
+        glm.2 <- suppressWarnings(glm(species[,i] ~ poly(var, 2), family="binomial"))
+        glm.3 <- suppressWarnings(glm(species[,i] ~ poly(var, 3), family="binomial"))
+        glm.AIC <- c(extractAIC (glm.1)[2], extractAIC (glm.2)[2],
+                     extractAIC (glm.3)[2])
+        
+        switch(c(1,2,3)[glm.AIC==min(glm.AIC)],
+               {specresponse <- glm.1; deg<-1},
+               {specresponse <- glm.2; deg<-2},
+               {specresponse <- glm.3; deg<-3})
+        
+        print(paste("GLM with", deg, "degrees fitted for", specnames[i]))
+        
+      } else if (model == "gam") {
+        
+        gam.list <- list()
+        gam.AIC <- 0
+        
+        for(n in 1:4) {
+          gam.list[[paste("gam", n, sep=".")]] <- mgcv::gam(species[,i] ~ s(var, k = n+2), family='binomial')
+          gam.AIC[n] <- extractAIC(gam.list[[n]])[2]
+        }
+        
+        switch(c(1,2,3,4)[gam.AIC==min(gam.AIC)],
+               {specresponse <- gam.list[[1]]; deg<-3},
+               {specresponse <- gam.list[[2]]; deg<-4},
+               {specresponse <- gam.list[[3]]; deg<-5},
+               {specresponse <- gam.list[[4]]; deg<-6})
+        
+        print(paste("GAM with", deg, "knots fitted for", specnames[i]))
+        
+      } else {
+        stop("Model unknown.")
+      }
+      
+      xneu <- seq(min(var), max(var), len = 101)
+      preds <- predict(specresponse, newdata = data.frame(var = xneu),
+                       type="response")
+      
+      if(bw == T) {
+        if(points == TRUE) {
+          if(i > 1) {
+            species[,i][species[,i]==1] <- species[,i][species[,i]==1] - 0.02*(i-1)
+            species[,i][species[,i]==0] <- species[,i][species[,i]==0] + 0.02*(i-1)
+          }
+          
+          col <- col2rgb(i)
+          points(var, species[,i], pch = i,
+                 col = rgb( ramp(seq(0, 1, length = 5)), maxColorValue = 255))
+        }
+        
+        lines(preds ~ xneu, lty=i)
+      } else {
+        
+        if(points == TRUE) {
+          if(i > 1) {
+            species[,i][species[,i]==1] <- species[,i][species[,i]==1] - 0.02*(i-1)
+            species[,i][species[,i]==0] <- species[,i][species[,i]==0] + 0.02*(i-1)
+          }
+          
+          col <- col2rgb(i)
+          points(var, species[,i],
+                 col = rgb( ramp(seq(0, 1, length = 5)), maxColorValue = 255),
+                 pch = 16)
+        }
+        
+        lines(preds ~ xneu, lty = i, lwd= 2, col = i)
+      }
+    }
+    
+    if(ismat == T) {
+      
+      if(bw == T){
+        if(points == TRUE) {
+          legend(0.70, 0.75,legend= "names(species)", "b", lty=1:ls, lwd = 2, pch=1:ls,
+                 bty = "n", cex = 0.85)
+        } else {
+          legend(0.70, 0.75, legend= "names(spees)", lty=1:ls, lwd = 2, pch=1:ls,
+                 bty = "n", cex = 0.85)
+        }
+      } else {
+        legend(0.70, 0.75, legend= c("Fishing-related buildings", "Built up area", "Town/city area", "Exposed coast", "Mire", "Technical heritage sites", "Steep coast", "Coniferous forest", "Impediment", "Open areas with heathland"), lty=1:ls, lwd = 2, col=1:ls, 
+               bty = "n", cex = 0.85)
+      }
+    }
+    
+  }  else {
+    stop("No species in matrix.")
+  }
+}
+
+par(mar=c(5.1, 4.1, 4.1, 12.1), xpd=TRUE)
+
+specresponse2 (av[ ,c(2,3,31,44,32, 49,54,68,78,82)], main = " ", akse1, xlab = "GNMDS 1 (Coastal plains, outer- inner coast)")
+
+#2,3,31,44,32, 49,54,68,78,82)
+
 
 
 ```
