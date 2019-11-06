@@ -2,7 +2,7 @@
 title: "Landscape element response plots"
 author: "Trond Simensen"
 date: "03 11 2019"
-output: html_document
+output: github_document
 ---
 
 ```{r setup, include=FALSE}
@@ -36,8 +36,10 @@ library(knitr)
 library(kableExtra)
 library(goeveg)
 library(vegan)
+```
 
 
+```{r, include = FALSE}
 #Importerer data(matriser)
 #Aktuelle datamatriser er: 
 
@@ -49,35 +51,6 @@ sheetname  <-  "KS457" # Setting the name of the sheet within the spreadsheet co
 av <- read_excel(spreadsheet_filename, sheet = sheetname, range = cell_cols("J:CO"), col_names = TRUE) #analysis variables, e.g. the 85 variables in the data; nod id's
 av  <-  as.data.frame(av)
 
-lg <- read_excel(spreadsheet_filename, sheet = sheetname, range = cell_cols("C:H"), col_names = TRUE) # placement along CLGs (affiliation to tentative major type based on the Norland project)
-lg  <-  as.data.frame(lg)
-
-nv <- read_excel(spreadsheet_filename, sheet = sheetname, range = cell_cols("CQ:CX"), col_names = TRUE) # key variables
-nv <- as.data.frame(nv)
-
-id <- read_excel(spreadsheet_filename, sheet = sheetname, range = cell_cols("A:B"), col_names = TRUE) #ID's and area
-id <- as.data.frame(id)
-
-sheetname  <-  "OrdRes" # Setting the name of the sheet within the spreadsheet containing data
-onv <- read_excel(spreadsheet_filename, sheet = sheetname, range = cell_cols("O:S"), col_names = TRUE) #rONV'er
-onv <- as.data.frame(onv)
-
-sheetname  <-  "Resk2" # Setting the name of the sheet within the spreadsheet containing data
-snv <- read_excel(spreadsheet_filename, sheet = sheetname, range = cell_cols("B:K"), col_names = TRUE) #reskalerte rONV'er (jf. regneark /resk)
-snv <- as.data.frame(snv)
-
-sheetname  <-  "JAtype" # Setting the name of the sheet within the spreadsheet containing data
-jk <- read_excel(spreadsheet_filename, sheet = sheetname, range = cell_cols("F:G"), col_names = TRUE) #jordartsklasser
-
-sheetname  <-  "OrdRes" # Setting the name of the sheet within the spreadsheet containing data
-ordx <- read_excel(spreadsheet_filename, sheet = sheetname, range = cell_cols("B:E"), col_names = TRUE) #DCA
-ordx <- as.data.frame(ordx)
-
-dca1 <- ordx[,1]
-dca2 <- ordx[,2]
-dca3 <- ordx[,3]
-dca4 <- ordx[,4]
-
 sheetname  <-  "OrdRes" # Setting the name of the sheet within the spreadsheet containing data
 ordx <- read_excel(spreadsheet_filename, sheet = sheetname, range = cell_cols("K:N"), col_names = TRUE) #GNMDS
 ordx <- as.data.frame(ordx)
@@ -87,165 +60,13 @@ gnmds2 <- ordx[,2]
 gnmds3 <- ordx[,3]
 gnmds4 <- ordx[,4]
 
-gnmds4_1 <- gnmds1
-gnmds4_2 <- gnmds2
-gnmds4_3 <- gnmds3 
-gnmds4_4 <- gnmds4
-
-akse1<-gnmds4_1
-akse2<-gnmds4_2
-akse3<-gnmds4_3
-akse4<-gnmds4_4
+akse1<-gnmds1
+akse2<-gnmds2
+akse3<-gnmds3
+akse4<-gnmds4
 
 attach(av)
-names(av)
-attach(lg)
-names(lg)
-attach(nv)
-names(nv)
-attach(id)
-names(id)
-attach(onv)
-names(onv)
-attach(snv)
-names(snv)
-attach(jk)
-names(jk)
 
-JK1 <- factor(JK1)
-JK2 <- factor(JK2)
-```
-
-
-
-```{r, include = FALSE}
-########################################################################
-#### Tolkning av ordinasjon vha korrelasjonsanalyse og enkle tester ####
-########################################################################
-
-#### Velg akser som skal analyseres
-
-GNMDS4_1  <-  gnmds1
-GNMDS4_2  <-  gnmds2
-GNMDS4_3  <-  gnmds3
-GNMDS4_4  <-  gnmds4
-
-#######Beregning av Kendall's tau mellom en ordinasjonsakse eller variabel og analysevariablene#######
-
-ax <- gnmds1 #Bestem akse
-env.var <- av #Bestem miljøvariabelmatrise
-
-p.val <- NULL #create empty objects for the p.values
-tau.val <- NULL #creates empty object for the t-values.
-p <- NULL
-
-for(i in 1:84) # A Loop that calculates Kendall's tau and p-values for all the correlations tests.
-{
-	z <- cor.test(ax,env.var[,i], method="k")
-	p.val[i] <- round(z$p.value, digits=5)
-	tau.val[i] <- round(z$estimate,digits=4)
-	if (p.val[i] < 0.05) #prints a star when the p-value is less than 0.05
-	{p[i] <- "###"
-      	}else{
-  	p[i] <- " "}
-}
-#p.val
-#tau.val
-(test.summary.ax = data.frame(cbind(names(env.var),p.val,tau.val,p)))
-corr.matrise1 <- as.data.frame(test.summary.ax [,c(1,3)])
-names(corr.matrise1) <- c("Variable", "GNMDS1" )
-
-##
-ax <- gnmds2 #Bestem akse
-env.var <- av #Bestem miljøvariabelmatrise
-
-p.val <- NULL #create empty objects for the p.values
-tau.val <- NULL #creates empty object for the t-values.
-p <- NULL
-
-for(i in 1:84) # A Loop that calculates Kendall's tau and p-values for all the correlations tests.
-{
-	z <- cor.test(ax,env.var[,i], method="k")
-	p.val[i] <- round(z$p.value, digits=5)
-	tau.val[i] <- round(z$estimate,digits=4)
-	if (p.val[i] < 0.05) #prints a star when the p-value is less than 0.05
-	{p[i] <- "###"
-      	}else{
-  	p[i] <- " "}
-}
-#p.val
-#tau.val
-(test.summary.ax = data.frame(cbind(names(env.var),p.val,tau.val,p)))
-corr.matrise2 <- as.data.frame(test.summary.ax [,3])
-names(corr.matrise2) <- c("GNMDS2" )
-
-##
-ax <- gnmds3 #Bestem akse
-env.var <- av #Bestem miljøvariabelmatrise
-
-p.val <- NULL #create empty objects for the p.values
-tau.val <- NULL #creates empty object for the t-values.
-p <- NULL
-
-for(i in 1:84) # A Loop that calculates Kendall's tau and p-values for all the correlations tests.
-{
-	z <- cor.test(ax,env.var[,i], method="k")
-	p.val[i] <- round(z$p.value, digits=5)
-	tau.val[i] <- round(z$estimate,digits=4)
-	if (p.val[i] < 0.05) #prints a star when the p-value is less than 0.05
-	{p[i] <- "###"
-      	}else{
-  	p[i] <- " "}
-}
-#p.val
-#tau.val
-(test.summary.ax = data.frame(cbind(names(env.var),p.val,tau.val,p)))
-corr.matrise3 <- as.data.frame(test.summary.ax [,3])
-names(corr.matrise3) <- c("GNMDS3" )
-
-##
-ax <- gnmds4 #Bestem akse
-env.var <- av #Bestem miljøvariabelmatrise
-
-p.val <- NULL #create empty objects for the p.values
-tau.val <- NULL #creates empty object for the t-values.
-p <- NULL
-
-for(i in 1:84) # A Loop that calculates Kendall's tau and p-values for all the correlations tests.
-{
-	z <- cor.test(ax,env.var[,i], method="k")
-	p.val[i] <- round(z$p.value, digits=5)
-	tau.val[i] <- round(z$estimate,digits=4)
-	if (p.val[i] < 0.05) #prints a star when the p-value is less than 0.05
-	{p[i] <- "###"
-      	}else{
-  	p[i] <- " "}
-}
-#p.val
-#tau.val
-(test.summary.ax = data.frame(cbind(names(env.var),p.val,tau.val,p)))
-corr.matrise4 <- as.data.frame(test.summary.ax [,3])
-names(corr.matrise4) <- c("GNMDS4" )
-###
-
-#Combining values to a dataframe
-corr.matrise <- cbind(corr.matrise1, corr.matrise2, corr.matrise3, corr.matrise4)
-corr.matrise$GNMDS1 <-  as.numeric(levels(corr.matrise$GNMDS1)[corr.matrise$GNMDS1])
-corr.matrise$GNMDS2 <-  as.numeric(levels(corr.matrise$GNMDS2)[corr.matrise$GNMDS2])
-corr.matrise$GNMDS3 <-  as.numeric(levels(corr.matrise$GNMDS3)[corr.matrise$GNMDS3])
-corr.matrise$GNMDS4 <-  as.numeric(levels(corr.matrise$GNMDS4)[corr.matrise$GNMDS4])
-```
-
-```{r, include= FALSE}
-Description <- c("No commercial buildings", "No fisheries-related buildings", "PA built-up", "PA flat terrain", "PA regulated magazine", "PA road", "PA thick layer of till", "PA depressions", "PA convex terrain", "Terrain form TPI1, numerical, mean", "PA strong ocean current", "PA normal ocean current", "PA weak ocean current", "PA large river", "PA trail, path", "PA steep terrain/slope", "PA landslide soil", "No summer mountain pasture", "PA old buildings", "Terrain ruggedness VRM3, mean", "Altitudinal range", "PA lime-rich bedrock", "PA lime-poor bedrock geology", "PA reindeer husbandry facilities", "PA plutonic rock", "PA volcanic rock", "PA sedimentary rock", "PA metamorphic rock", "PA terrestrial area", "PA built-up area", "PA town/city area", "PA mire", "PA moderate slope", "No marine islands", "PA marine deposits", "PA power lines", "PA lacustrine deposits", "PA glaciofluvial deposits", "PA exposed bedrock", "PA freshwater lake", "No freshwater lake islands", "Hydrographic index, ER, mean", "PA river", "PA exposed coast", "PA sligyhtly exposed coast", "PA slightly protected coast", "No lakes", "No cultural heritage sites outdoors", "No technical heritage sites", "No marine cultural heritage sites", "No church ruins", "No ancient rock art sites", "No archeological heritage sites", "PA steep coast", "PA flat coast", "Coastal ruggedness, VRM3, mean", "Coastal ruggedness, coarse scale, VRM9, mean", "PA rugged coast", "PA smooth/flat coast", "Coastal complexity", "PA complex coastline", "PA simple coastline Gab_fi", "PA boreal heaths", "PA south facing terrain", "PA north facing terrain", "PA large buildings", "PA open areas", "PA coniferous forest", "PA mixed boreal forest", "PA arable land", "PA deciduous forest", "PA surface cultivated land", "Distance to mire, mean", "Distance to lake, mean", "Distance to coast, mean", "PA rugged terrain", "PA rugged terrain, TPI6", "PA impediment", "PA patchy open treeless area", "PA lichen heath", "PA dry heath/open areas", "PA moist/fresh heath/open areas", "PA unregistered heath/open areas", "Inverse island size")
-
-corr.matrise <- cbind(corr.matrise, Description)
-corr.matrise <- corr.matrise [ , c(1,6,2:5)]
-```
-
-```{r}
-kable(corr.matrise) %>%
-  kable_styling(bootstrap_options = c("striped", "hover", "condensed", font_size = 9))
 ```
 
 ```{r, echo=FALSE}
@@ -416,10 +237,371 @@ specresponse2 <- function(species, var, main, xlab, model = "auto", method = "en
 ```
 
 
-```{r, echo=FALSE}
-par(mar=c(8,4,4,10), xpd=TRUE)
+```{r, include=FALSE}
+#Importerer data(matriser)
+#Aktuelle datamatriser er: 
 
+spreadsheet_filename  <-  "XSpFreq.xlsx" # Setting the filename to the spreadsheet containg data
+
+# Reading in data, specifying which columns to read with the command 'range'
+sheetname  <-  "Dta" # Setting the name of the sheet within the spreadsheet containing data
+
+sp <- read_excel(spreadsheet_filename, sheet = sheetname, range = cell_cols("C:GF"), col_names = TRUE) #analysis variables,
+
+sp<-sp[c(1:100), ]
+attach(sp)
+```
+
+```{r}
+y<-sp
+#making Bray-Curtis dissimilarity matrix:
+dist.y<-vegdist(y,method="bray") 
+dist.y 
+#Replacing unreliable distances (B-C > 0.8 by geodesic distances,
+#using stepacross; note that the optimal value for epsilon may be dataset-specific
+geodist.y<-isomapdist(dist.y, epsilon=0.8)
+geodist.y
+
+k=2 #k determines the number of dimensions in the ordination
+#define a general, empty object called mds:
+mds<-NULL
+#making 100 "mds"s from initial starting configurations, allocating them into the mds object:
+for(i in 1:1000)
+{mds[[i]]<-monoMDS(geodist.y, matrix(c(runif(dim(y)[1]*k)),nrow=dim(y)[1]), 
+  k=2, model = "global", maxit=200, smin = 1e-7, sfgrmin = 1e-7)}
+
+#alternative options: model = "local", "linear" or "hybrid" with threshold = [value]
+
+#the mds object is now a list consisting of 100 "subobjects" being lists
+# extracting the stress values as a vector - 
+# stress is given as the 22th element in each "subobject list"
+mds.stress<-unlist(lapply(mds,function(v){v[[22]]})) 
+
+# looking at the stress values for 100 mds:
+mds.stress
+#ordering the stress values for the 100 mds:
+order(mds.stress)
+#Saving the order in a vector
+ordered<-order(mds.stress)
+ordered
+
+#find the stress of the solutions with the lowest and second lowest stress:
+mds.stress[ordered[1]]
+mds.stress[ordered[2]]
+
+#scaling of axes to half change units and varimax rotation by postMDS
+mds.best<-postMDS(mds[[ordered[1]]],geodist.y, pc = TRUE, halfchange = TRUE, threshold = 0.8)
+mds.best
+mds.secbest<-postMDS(mds[[ordered[2]]],geodist.y, pc = TRUE, halfchange = TRUE, threshold = 0.8)
+mds.secbest
+
+#Procrustes comparisons
+procrustes(mds.best,mds.secbest,permutations=999)
+protest(mds.best,mds.secbest,permutations=999)
+
+plot(procrustes(mds.best,mds.secbest,permutations=999))
+
+#making variables from GNMDS axes 1 and 2 for plotting
+gnmds1<-mds.best$points[,1]
+gnmds2<-mds.best$points[,2]
+
+#Making the ordination diagram using the best solution:
+plot(gnmds1,gnmds2,xlab="gnmds1 (scaling in H.C. units)",ylab="gnmds2 (scaling in H.C. units",xlim=c(-1.5,1.5),ylim=c(-1.3,1.3),type="n")
+labels<- c(1:100)
+text(gnmds1,gnmds2,labels,cex=0.7) #The cex command adjusts the size of plot labels
+lines(c(-2,2),c(0,0),lty=2,col=8)
+lines(c(0,0),c(-2,2),lty=2,col=8)
+
+```
+
+```{r, echo=FALSE}
+
+palette(c("#a6cee3", "#1f78b4", "#b2df8a", "#33a02c", "#fb9a99", "#e31a1c", 
+                    "#fdbf6f", "#ff7f00", "#cab2d6", "#6a3d9a", "#ffff99", "#b15928"))
+#rgb( ramp(seq(0, 1, length = 5)), max = 255)
+
+specresponse3 <- function(species, var, main, xlab, model = "auto", method = "env", axis = 1, points = FALSE, bw = FALSE) {
+  
+  if(!is.data.frame(species)) {
+    
+    if(missing(main)) {
+      main <- deparse(substitute(species))
+    }
+    
+    specnames <- deparse(substitute(species))
+    species <- data.frame(species)
+    ismat <- F
+    
+  } else {
+    if(missing(main)) {
+      main <- " "
+    }
+    specnames <- names(species)
+    ismat <- T
+  }
+  
+  species <- decostand(species, method = "pa")
+  
+  if(length(species) >= 1) {
+    
+    ls <- length(species)
+    
+    if(method == "env") {
+      
+      if(missing(xlab)) {
+        xlab <- deparse(substitute(var))
+      }
+    } else if(method == "ord") {
+      
+      # Extract site scores from ordination
+      var <- as.numeric(scores(var, display="sites", choices=axis))
+      
+      # X-axis labeling
+      if(missing(xlab)) {
+        xlab <- paste("Axis", axis, "sample scores")
+      }
+    } else {
+      stop("Method unknown.")
+    }
+    
+    plot(var, species[,1], main = main, type="n", frame = FALSE, 
+         xlab = xlab, ylab="Probability of occurrence", ylim = c(0,1))
+    
+    for(i in 1:ls) {
+      
+      if(length(species[species[,i]>0,i]) <= 5) {
+        # tried warning instead of print
+        warning(paste("Only", length(species[species[,i]>0,i]), "occurrences of", names(species)[i], "."))
+      }
+      
+      if(model == "unimodal") {
+        
+        specresponse <- suppressWarnings(glm(species[,i] ~ poly(var, 2),
+                                             family="binomial"))
+        
+      } else if (model == "linear") {
+        
+        specresponse <- suppressWarnings(glm(species[,i] ~ var,
+                                             family="binomial"))
+        
+      } else if (model == "bimodal") {
+        
+        specresponse <- suppressWarnings(glm(species[,i] ~ poly(var, 4),
+                                             family="binomial"))
+        
+      }
+      else if (model == "auto") {
+        
+        glm.1 <- suppressWarnings(glm(species[,i] ~ poly(var, 1), family="binomial"))
+        glm.2 <- suppressWarnings(glm(species[,i] ~ poly(var, 2), family="binomial"))
+        glm.3 <- suppressWarnings(glm(species[,i] ~ poly(var, 3), family="binomial"))
+        glm.AIC <- c(extractAIC (glm.1)[2], extractAIC (glm.2)[2],
+                     extractAIC (glm.3)[2])
+        
+        switch(c(1,2,3)[glm.AIC==min(glm.AIC)],
+               {specresponse <- glm.1; deg<-1},
+               {specresponse <- glm.2; deg<-2},
+               {specresponse <- glm.3; deg<-3})
+        
+
+      } else if (model == "gam") {
+        
+        gam.list <- list()
+        gam.AIC <- 0
+        
+        for(n in 1:4) {
+          gam.list[[paste("gam", n, sep=".")]] <- mgcv::gam(species[,i] ~ s(var, k = n+2), family='binomial')
+          gam.AIC[n] <- extractAIC(gam.list[[n]])[2]
+        }
+        
+        switch(c(1,2,3,4)[gam.AIC==min(gam.AIC)],
+               {specresponse <- gam.list[[1]]; deg<-3},
+               {specresponse <- gam.list[[2]]; deg<-4},
+               {specresponse <- gam.list[[3]]; deg<-5},
+               {specresponse <- gam.list[[4]]; deg<-6})
+        
+      } else {
+        stop("Model unknown.")
+      }
+      
+      xneu <- seq(min(var), max(var), len = 101)
+      preds <- predict(specresponse, newdata = data.frame(var = xneu),
+                       type="response")
+      
+      if(bw == T) {
+        if(points == TRUE) {
+          if(i > 1) {
+            species[,i][species[,i]==1] <- species[,i][species[,i]==1] - 0.02*(i-1)
+            species[,i][species[,i]==0] <- species[,i][species[,i]==0] + 0.02*(i-1)
+          }
+          
+          col <- col2rgb(i)
+          points(var, species[,i], pch = i,
+                 col = rgb( ramp(seq(0, 1, length = 5)), maxColorValue = 255))
+        }
+        
+        lines(preds ~ xneu, lty=i)
+      } else {
+        
+        if(points == TRUE) {
+          if(i > 1) {
+            species[,i][species[,i]==1] <- species[,i][species[,i]==1] - 0.02*(i-1)
+            species[,i][species[,i]==0] <- species[,i][species[,i]==0] + 0.02*(i-1)
+          }
+          
+          col <- col2rgb(i)
+          points(var, species[,i],
+                 col = rgb( ramp(seq(0, 1, length = 5)), maxColorValue = 255),
+                 pch = 16)
+        }
+        
+        lines(preds ~ xneu, lty = i, lwd= 2, col = i)
+      }
+    }
+    
+    if(ismat == T) {
+      
+      if(bw == T){
+        if(points == TRUE) {
+          legend(0.70, 0.75,legend= "names(species)", "b", lty=1:ls, lwd = 2, pch=1:ls,
+                 bty = "n", cex = 0.85)
+        } else {
+          legend(0.70, 0.75, legend= "names(spees)", lty=1:ls, lwd = 2, pch=1:ls,
+                 bty = "n", cex = 0.85)
+        }
+      } else {
+        legend(1.9, 1.25, legend= c("Pinus sylvestris", "Populus tremula", "Sorbus aucuparia", "Vaccinium uliginosum", "Anemone nemorosa", "Linnaea borealis", "Maianthemum bifolium", "Avenella flexuosa", "Dicranum polysetum", "Cladonia rangiferina"), lty=1:ls, text.font=3, lwd = 2, col=1:ls, 
+               bty = "n", cex = 0.85)
+      }
+    }
+    
+  }  else {
+    stop("No species in matrix.")
+  }
+}
+```
+
+
+```{r, echo=FALSE}
+par(mfrow=c(2,1), mar=c(4,4,2,10), xpd=TRUE)
+#par(mar=c(8,4,4,10), xpd=TRUE)
+specresponse3 (y[ ,c(5,6,9, 16,18,35,39, 60, 82,182)], main = " ", gnmds1, xlab = "GNMDS 1 (blah blah blah)")
+#par(mar=c(8,4,4,10), xpd=TRUE)
 specresponse2 (av[ ,c(2,3,31,44,32, 49,54,68,78,82)], main = " ", akse1, xlab = "GNMDS 1 (Coastal plains, outer- inner coast)")
 
 ```
 
+```{r}
+species_subset <- cbind (gnmds1, gnmds2, y)
+species_subset <- subset(species_subset, gnmds1 > -1 )
+species_subset <- subset(species_subset, gnmds1 < 1 )
+y2 <- species_subset[ , c(3:188)]
+sp_gnmds1 <- species_subset[ , 1]
+```
+
+
+
+```{r, echo=FALSE}
+#par(mfrow=c(2,1), mar=c(4,4,2,8), xpd=TRUE)
+par(mar=c(8,4,7,10), xpd=TRUE)
+specresponse3 (y2[ ,c(5,6,9, 16,18,35,39, 60, 82,182)], main = " ", sp_gnmds1, xlab = "GNMDS 1 (blah blah blah)")
+```
+
+```{r, echo=FALSE}
+par(mfrow=c(2,1), mar=c(4,4,1,10), xpd=TRUE)
+#par(mar=c(8,4,4,10), xpd=TRUE)
+specresponse3 (y2[ ,c(5,6,9, 16,18,35,39, 60, 82,182)], main = " ", sp_gnmds1, xlab = "GNMDS 1 (Boreal forest)")
+#par(mar=c(8,4,4,10), xpd=TRUE)
+specresponse2 (av[ ,c(2,3,31,44,32, 49,54,68,78,82)], main = " ", akse1, xlab = "GNMDS 1 (Coastal plains, outer- inner coast)")
+
+```
+
+```{r, echo=FALSE}
+par(mar=c(4,4,10,12), xpd=TRUE)
+specresponse2 (av[ ,c(2,3,31,44,32, 49,54,68,78,82)], main = " ", akse1, xlab = "GNMDS 1 (Coastal plains, outer- inner coast)")
+```
+
+
+```{r, include=FALSE}
+#Script for GNMDS based upon Oppkuven data set
+#Load packages
+
+library(vegan)
+library(MASS)
+library(stats)
+
+#Importing species data from Oppkuven.xls/Species
+#Note: Skip first column!
+
+#Importerer data(matriser)
+#Aktuelle datamatriser er: 
+
+spreadsheet_filename  <-  "Oppkuven.xlsx" # Setting the filename to the spreadsheet containg data
+
+# Reading in data, specifying which columns to read with the command 'range'
+sheetname  <-  "Species" # Setting the name of the sheet within the spreadsheet containing data
+
+y <- read_excel(spreadsheet_filename, sheet = sheetname, range = cell_cols("B:BW"), col_names = TRUE) #analysis variables, 
+
+attach(y)
+names(y)
+
+#making Bray-Curtis dissimilarity matrix:
+dist.y<-vegdist(y,method="bray") 
+dist.y 
+#Replacing unreliable distances (B-C > 0.8 by geodesic distances,
+#using stepacross; note that the optimal value for epsilon may be dataset-specific
+geodist.y<-isomapdist(dist.y, epsilon=0.8)
+geodist.y
+
+k=2 #k determines the number of dimensions in the ordination
+#define a general, empty object called mds:
+mds<-NULL
+#making 100 "mds"s from initial starting configurations, allocating them into the mds object:
+for(i in 1:1000)
+{mds[[i]]<-monoMDS(geodist.y, matrix(c(runif(dim(y)[1]*k)),nrow=dim(y)[1]), 
+  k=2, model = "global", maxit=200, smin = 1e-7, sfgrmin = 1e-7)}
+
+#alternative options: model = "local", "linear" or "hybrid" with threshold = [value]
+
+#the mds object is now a list consisting of 100 "subobjects" being lists
+# extracting the stress values as a vector - 
+# stress is given as the 22th element in each "subobject list"
+mds.stress<-unlist(lapply(mds,function(v){v[[22]]})) 
+
+# looking at the stress values for 100 mds:
+mds.stress
+#ordering the stress values for the 100 mds:
+order(mds.stress)
+#Saving the order in a vector
+ordered<-order(mds.stress)
+ordered
+
+#find the stress of the solutions with the lowest and second lowest stress:
+mds.stress[ordered[1]]
+mds.stress[ordered[2]]
+
+#scaling of axes to half change units and varimax rotation by postMDS
+mds.best<-postMDS(mds[[ordered[1]]],geodist.y, pc = TRUE, halfchange = TRUE, threshold = 0.8)
+mds.best
+mds.secbest<-postMDS(mds[[ordered[2]]],geodist.y, pc = TRUE, halfchange = TRUE, threshold = 0.8)
+mds.secbest
+
+#Procrustes comparisons
+procrustes(mds.best,mds.secbest,permutations=999)
+protest(mds.best,mds.secbest,permutations=999)
+
+plot(procrustes(mds.best,mds.secbest,permutations=999))
+
+#making variables from GNMDS axes 1 and 2 for plotting
+gnmds1<-mds.best$points[,1]
+gnmds2<-mds.best$points[,2]
+
+#Making the ordination diagram using the best solution:
+plot(gnmds1,gnmds2,xlab="gnmds1 (scaling in H.C. units)",ylab="gnmds2 (scaling in H.C. units",xlim=c(-1.5,1.5),ylim=c(-1.3,1.3),type="n")
+labels<- c(1:100)
+text(gnmds1,gnmds2,labels,cex=0.7) #The cex command adjusts the size of plot labels
+lines(c(-2,2),c(0,0),lty=2,col=8)
+lines(c(0,0),c(-2,2),lty=2,col=8)
+
+```
