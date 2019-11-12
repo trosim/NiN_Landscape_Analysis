@@ -332,7 +332,7 @@ w2
 par(mfrow=c(1,1))
 
 #Tegner diagrammet for aksene 1 og 2
-par(plt=c(0.15, 0.95, 0.15, y2))
+par(plt=c(0.15, 0.95, 0.25, y2+0.25))
 plot(akse1,akse2,xlab="GNMDS 1 Coastal plains (KS457)",ylab="GNMDS 2 Coastal plains (KS457)",xlim=c(min(akse1)-0.01,max(akse1)+0.01),ylim=c(min(akse2)-0.01,max(akse2)+0.01),xaxp=c(-0.5,1,3),yaxp=c(-0.5,0.5,2),type="n") #Grunnlag for plotting av symboler etc.
 points(akse1,akse2,pch=16,cex=0.75)
 lines(c(-2,2),c(0,0),lty=2,col=8)
@@ -390,7 +390,7 @@ ordvek133
 ```{r, cache = TRUE, echo=FALSE}
 
 #Tegner diagrammet for aksene 1 og 2
-par(plt=c(0.15, 0.95, 0.15, y2))
+par(plt=c(0.15, 0.95, 0.25, (y2+0.25)))
 plot(akse1,akse2,xlab="GNMDS 1 Coastal plains (KS457)",ylab="GNMDS 2 Coastal plains (KS457)",xlim=c(min(akse1)-0.01,max(akse1)+0.01),ylim=c(min(akse2)-0.01,max(akse2)+0.01),xaxp=c(-0.5,1,3),yaxp=c(-0.5,0.5,2),type="n") #Grunnlag for plotting av symboler etc.
 points(akse1,akse2,pch=16,cex=0.75)
 lines(c(-2,2),c(0,0),lty=2,col=8)
@@ -406,7 +406,7 @@ plot(ordvek12SN,arrow.mul=.58,col="blue3",add=T,cex=0.8)
 ```{r, cache = TRUE, echo=FALSE}
 
 #Tegner diagrammet for aksene 1 og 2
-par(plt=c(0.15, 0.95, 0.15, y2))
+par(plt=c(0.15, 0.95, 0.25, (y2+0.25)))
 plot(akse1,akse2,xlab="GNMDS 1 Coastal plains (KS457)",ylab="GNMDS 2 Coastal plains (KS457)",xlim=c(min(akse1)-0.01,max(akse1)+0.01),ylim=c(min(akse2)-0.01,max(akse2)+0.01),xaxp=c(-0.5,1,3),yaxp=c(-0.5,0.5,2),type="n") #Grunnlag for plotting av symboler etc.
 points(akse1,akse2,pch=16,cex=0.75)
 lines(c(-2,2),c(0,0),lty=2,col=8)
@@ -433,7 +433,7 @@ par(mfrow=c(1,1))
 
 ##For IfI med OI (akser 1 og 2)
 
-par(plt=c(0.15, 0.95, 0.15, y2))
+par(plt=c(0.15, 0.95, 0.25, (y2+0.25)))
 plot(akse1,akse2,xlab="GNMDS 1 Coastal plains (KS457)",ylab="GNMDS 2 Coastal plains (KS457)",xlim=c(min(akse1)-0.01,max(akse1)+0.01),ylim=c(min(akse2)-0.01,max(akse2)+0.01),xaxp=c(-0.5,1,3),yaxp=c(-0.5,0.5,2),type="n") #Grunnlag for plotting av symboler etc.
 lines(c(-2,2),c(0,0),lty=2,col=8)
 lines(c(0,0),c(-2,2),lty=2,col=8)
@@ -473,7 +473,7 @@ plot(IfI,JI)
 
 
 ```{r, echo=FALSE}
-par(plt=c(0.15, 0.95, 0.15, y2))
+par(plt=c(0.15, 0.95, 0.25, (y2+0.25)))
 plot(akse1,akse2,xlab="GNMDS 1 Coastal plains (KS457)",ylab="GNMDS 2 Coastal plains (KS457)",xlim=c(min(akse1)-0.01,max(akse1)+0.01),ylim=c(min(akse2)-0.01,max(akse2)+0.01),xaxp=c(-0.5,1,3),yaxp=c(-0.5,0.5,2),type="n") #Grunnlag for plotting av symboler etc.
 lines(c(-2,2),c(0,0),lty=2,col=8)
 lines(c(0,0),c(-2,2),lty=2,col=8)
@@ -503,7 +503,7 @@ hist(JI,  main = " ")
 
 
 ```{r, echo=FALSE}
-par(plt=c(0.15, 0.95, 0.15, y2))
+par(plt=c(0.15, 0.95, 0.25, y2+0.25))
 plot(akse1,akse2,xlab="GNMDS 1 Coastal plains (KS457)",ylab="GNMDS 2 Coastal plains (KS457)",xlim=c(min(akse1)-0.01,max(akse1)+0.01),ylim=c(min(akse2)-0.01,max(akse2)+0.01),xaxp=c(-0.5,1,3),yaxp=c(-0.5,0.5,2),type="n") #Grunnlag for plotting av symboler etc.
 lines(c(-2,2),c(0,0),lty=2,col=8)
 lines(c(0,0),c(-2,2),lty=2,col=8)
@@ -528,7 +528,7 @@ text(-0.72,0.41,"JP = 3",adj=0,cex=0.8)
 ```{r, echo=FALSE}
 ##Fig. med jordartskategorier på akser 1 og 2
 
-par(plt=c(0.15, 0.95, 0.15, z2))
+par(plt=c(0.15, 0.95, 0.25, (z2+0.25)))
 plot(akse1,akse2,xlab="GNMDS 1 Coastal plains (KS457)",ylab="GNMDS 2 Coastal plains (KS457)",xlim=c(min(akse1)-0.01,max(akse1)+0.01),ylim=c(min(akse2)-0.01,max(akse2)+0.01),xaxp=c(-0.5,1,3),yaxp=c(-0.5,0.5,2),type="n") #Grunnlag for plotting av symboler etc.
 lines(c(-2,2),c(0,0),lty=2,col=8)
 lines(c(0,0),c(-2,2),lty=2,col=8)
@@ -557,7 +557,7 @@ hist(Arlov_a,  main = " ")
 
 
 ```{r, echo=FALSE}
-par(plt=c(0.15, 0.95, 0.15, z2))
+par(plt=c(0.15, 0.95, 0.25, z2+0.25))
 plot(akse1,akse2,xlab="GNMDS 1 Coastal plains (KS457)",ylab="GNMDS 2 Coastal plains (KS457)",xlim=c(min(akse1)-0.01,max(akse1)+0.01),ylim=c(min(akse2)-0.01,max(akse2)+0.01),xaxp=c(-0.5,1,3),yaxp=c(-0.5,0.5,2),type="n") #Grunnlag for plotting av symboler etc.
 lines(c(-2,2),c(0,0),lty=2,col=8)
 lines(c(0,0),c(-2,2),lty=2,col=8)
@@ -589,7 +589,7 @@ text(-0.72,0.33,"SN = 5",adj=0,cex=0.8)
 ```{r, echo=FALSE}
 ##For Oyst_i
 
-par(plt=c(0.15, 0.95, 0.15, z2))
+par(plt=c(0.15, 0.95, 0.25, z2+0.25))
 plot(akse1,akse2,xlab="GNMDS 1 Coastal plains (KS457)",ylab="GNMDS 2 Coastal plains (KS457)",xlim=c(min(akse1)-0.01,max(akse1)+0.01),ylim=c(min(akse2)-0.01,max(akse2)+0.01),xaxp=c(-0.5,1,3),yaxp=c(-0.5,0.5,2),type="n") #Grunnlag for plotting av symboler etc.
 lines(c(-2,2),c(0,0),lty=2,col=8)
 lines(c(0,0),c(-2,2),lty=2,col=8)
@@ -625,7 +625,7 @@ hist(Oyst_i[IfI==0], main= " ")
 ```
 
 ```{r, echo=FALSE}
-par(plt=c(0.15, 0.95, 0.15, z2))
+par(plt=c(0.15, 0.95, 0.25, z2+0.25))
 plot(akse1,akse2,xlab="GNMDS 1 Coastal plains (KS457)",ylab="GNMDS 2 Coastal plains (KS457)",xlim=c(min(akse1)-0.01,max(akse1)+0.01),ylim=c(min(akse2)-0.01,max(akse2)+0.01),xaxp=c(-0.5,1,3),yaxp=c(-0.5,0.5,2),type="n") #Grunnlag for plotting av symboler etc.
 lines(c(-2,2),c(0,0),lty=2,col=8)
 lines(c(0,0),c(-2,2),lty=2,col=8)
@@ -689,29 +689,43 @@ points(-0.75,0.33,pch=16,cex=0.9,col="red")
 text(-0.72,0.33,"SN = 5",adj=0,cex=0.8)
 
 ```
-```{r}
+
+
 #############################################################################################
 #### Tallfesting av KLG-kandidatenes relative viktighet ved variasjonsoppdelingsanalyse ####
 #############################################################################################
 
+
+
+```{r, echo=TRUE}
 #Datasett: av
 
 #Bestemmer total variasjon
 
-vo0 <- rda(av~+1,scale=T)  #scale = T gj?r at dataene blir sentrert og standardisert ved deling med SD
+vo0 <- rda(av~+1,scale=T)  #scale = T gjør at dataene blir sentrert og standardisert ved deling med SD
 vo0
+```
 
+
+```{r, echo=TRUE}
 voG1a <- rda(av~RR1,scale=T)
 voG1a
+```
+
+
+```{r, echo=TRUE}
 tvoG1a <- permutest(voG1a,permutations=9999)
 tvoG1a
 ```
 
-
+```{r}
 voG1b <- rda(av~Crug9_m,scale=T)
 voG1b
 tvoG1b <- permutest(voG1b,permutations=9999)
 tvoG1b
+```
+
+
 voG1c <- rda(av~Rug3_m,scale=T)
 voG1c
 tvoG1c <- permutest(voG1c,permutations=9999)
@@ -797,11 +811,13 @@ voG1cl <- rda(av~Crug3_m+Condition(Rug3_m),scale=T)
 voG1cl
 tvoG1cl <- permutest(voG1cl,permutations=9999)
 tvoG1cl
-
+```{r}
 voG1cja <- rda(av~RR1+Condition(Rug3_m+Tpi1h_a),scale=T)
 voG1cja
 tvoG1cja <- permutest(voG1cja,permutations=9999)
 tvoG1cja
+
+```
 voG1cjb <- rda(av~Crug9_m+Condition(Rug3_m+Tpi1h_a),scale=T)
 voG1cjb
 tvoG1cjb <- permutest(voG1cjb,permutations=9999)
@@ -1244,14 +1260,835 @@ tvoGU1U2 <- permutest(voGU1U2,permutations=99)
 tvoGU1U2
 
 
+```{r}
 voGUA1 <- rda(av~IfI+Gab_a+Condition(Arlov_a+Arbla_a+R_net_a+Ekspve_a+Oyst_i+Rug3_m+Tpi1h_a+Dismire+Inns_s + Dislake),scale=T)
 voGUA1
 tvoGUA1 <- permutest(voGUA1,permutations=99)
 tvoGUA1
+```
+
+
 voGUA2 <- rda(av~Arfull_a+Arover_a+Condition(Arlov_a+Arbla_a+R_net_a+Ekspve_a+Oyst_i+Rug3_m+Tpi1h_a+Dismire+Inns_s + Dislake),scale=T)
 voGUA2
 tvoGUA2 <- permutest(voGUA2,permutations=99)
 tvoGUA2
+
+####################################################################
+#### Finner prim?rn?kkelvariabler for identifiserte KLG ved RDA ####
+####################################################################
+
+#Skript for ? finne ortogonale prim?rn?kkelvariabler (rONV'er) i ei n?kkelvariabelgruppe
+
+#Om n?dvendig: importerer relevante rPNV'er
+
+#dta_pnv <- read-table("clipboard",header=T)
+#attach(dta_pnv)
+
+#VE for 1 .akse i RDA'er gir VA(PNV)
+```{r}
+RDA_IYK <- rda(av~R_net_a+Ekspve_a  + Oyst_i,scale=T)
+RDA_RE <- rda(av~Rug3_m + Tpi1h_a,scale=T)
+RDA_VP <- rda(av~Dismire+Inns_s + Dislake,scale=T)
+RDA_SkP <- rda(av~Arlov_a + Arbla_a,scale=T)
+RDA_OI <- rda(av~IfI+Gab_a,scale=T)
+
+#EV for RDA 1 gir VE for PNV
+
+summary(RDA_IYK)$cont
+summary(RDA_RE)$cont
+summary(RDA_VP)$cont
+summary(RDA_SkP)$cont
+summary(RDA_OI)$cont
+```
+```{r}
+#Finner oPNV'er
+
+oRDA_IYK <- rda(av~R_net_a+Ekspve_a  + Oyst_i,scale=T)
+oRDA_RE <- rda(av~Rug3_m + Tpi1h_a+Condition(R_net_a+Ekspve_a  + Oyst_i),scale=T)
+oRDA_VP <- rda(av~Dismire+Inns_s + Dislake+Condition(R_net_a+Ekspve_a  + Oyst_i +Rug3_m + Tpi1h_a),scale=T)
+oRDA_SkP <- rda(av~Arlov_a + Arbla_a+Condition(Dismire+Inns_s + Dislake+R_net_a+Ekspve_a  + Oyst_i +Rug3_m + Tpi1h_a),scale=T)
+oRDA_OI <- rda(av~IfI+Gab_a+Condition(Arlov_a + Arbla_a+Dismire+Inns_s + Dislake+R_net_a+Ekspve_a  + Oyst_i + Rug3_m + Tpi1h_a),scale=T)
+
+summary(oRDA_IYK)$cont  #gir egenverdien for RDA-akse 1
+summary(oRDA_RE)$cont
+summary(oRDA_VP)$cont
+summary(oRDA_SkP)$cont
+summary(oRDA_OI)$cont
+```
+
+```{r}
+#Ekstraksjon av ONV; dette er vektorer
+ONV_IYK <- scores(oRDA_IYK, display="lc", choices=1, scaling=1)
+ONV_RE <- -scores(oRDA_RE, display="lc", choices=1, scaling=1)
+ONV_VP <- scores(oRDA_VP, display="lc", choices=1, scaling=1)
+ONV_SkP <- scores(oRDA_SkP, display="lc", choices=1, scaling=1)
+ONV_OI <- -scores(oRDA_OI, display="lc", choices=1, scaling=1)
+```
+
+
+
+```{r}
+#Sjekker om rONV'en har samme fortegn som variablen(e) som karakteriserer den, og gj?r om n?dvendig ny ekstraksjon av sk?rer med motsatt fortegn
+cor.test(ONV_IYK,Lled_a,method="k")
+cor.test(ONV_RE,RR1,method="k")
+cor.test(ONV_VP,Inns_s,method="k")
+cor.test(ONV_SkP,Arlov_a,method="k")
+cor.test(ONV_OI,IfIu,method="k")
+```
+
+```{r}
+#Rangerer ONV'ene
+
+rONV_IYK <- (ONV_IYK-min(ONV_IYK))/(max(ONV_IYK)-min(ONV_IYK))
+rONV_RE <- (ONV_RE-min(ONV_RE))/(max(ONV_RE)-min(ONV_RE))
+rONV_VP <- (ONV_VP-min(ONV_VP))/(max(ONV_VP)-min(ONV_VP))
+rONV_SkP <- (ONV_SkP-min(ONV_SkP))/(max(ONV_SkP)-min(ONV_SkP))
+rONV_OI <- (ONV_OI-min(ONV_OI))/(max(ONV_OI)-min(ONV_OI))
+```
+
+
+
+#Eksporterer rONV-sk?rer til Excel
+
+writeClipboard(as.character(rONV_IYK))
+writeClipboard(as.character(rONV_RE))
+writeClipboard(as.character(rONV_VP))
+writeClipboard(as.character(rONV_SkP))
+writeClipboard(as.character(rONV_OI))
+
+##########################################################
+#### Beregning av LA mellom KLG-klasser ved bruk av PD####
+##########################################################
+
+#Importerer om n?dvendig rPNVer fra Excel:
+
+#rPNV <- read.table("clipboard",header=T)
+#attach(rPNV)
+#names(rPNV)
+```{r}
+#Analyse av KLG'er representert ved rangerte n?kkelvariabler
+
+rPNV <- rONV_IYK
+
+#Inspeksjon av OE'enes frekvensfordeling langs rPNV'en
+hist(rPNV)
+
+```
+
+#Importerer landskapsegenskapsprofiler fra regneark
+
+### DENNE FUNKER IKKE ###lep <- read.table("clipboard",header=F)
+### DENNE FUNKER IKKE ###attach(lep)
+### DENNE FUNKER IKKE ###names(lep)
+
+### DENNE FUNKER IKKE ###dim(lep)
+
+#Beregner artsulikhet (PD)
+
+### DENNE FUNKER IKKE ###dist <- vegdist(lep,method="bray") 
+### DENNE FUNKER IKKE ###dist
+
+### DENNE FUNKER IKKE ####PD-verdiene er s? lave at det ikke er noe behov for ? bruke geodetisk avstand
+
+### DENNE FUNKER IKKE ####Eksporterer til Excel
+
+### DENNE FUNKER IKKE ###writeClipboard(as.character(dist)) #M? importeres som 'character' (jf. Crawley 2007: 77)
+
+### DENNE FUNKER IKKE ####Importerer IA-estimater fra NiN2LAD5/OI-PD2
+
+### DENNE FUNKER IKKE ###IAest.df <- read.table("clipboard",header=T)
+### DENNE FUNKER IKKE ###attach(IAest.df)
+### DENNE FUNKER IKKE ###names(IAest.df)
+
+### DENNE FUNKER IKKE ###hist(IAest)
+
+### DENNE FUNKER IKKE ###mean(IAest)
+### DENNE FUNKER IKKE ###sd(IAest)
+
+
+####################################################################
+#### Finner prim?rn?kkelvariabler for identifiserte KLG ved RDA ####
+####################################################################
+
+#Skript for ? finne ortogonale prim?rn?kkelvariabler (rONV'er) i ei n?kkelvariabelgruppe
+
+#Om n?dvendig: importerer relevante rPNV'er
+
+#dta_pnv <- read-table("clipboard",header=T)
+#attach(dta_pnv)
+
+#VE for 1 .akse i RDA'er gir VA(PNV)
+```{r}
+RDA_RE <- rda(av~RR1+Rug3_m+Tpi1h_a,scale=T) #er lik PNV, for den f?rst utvalgte gruppa
+RDA_SkP <- rda(av~Arbar_a + Sn_imp,scale=T)
+RDA_OI <- rda(av~IfIu+Gab_a,scale=T)
+#EV for RDA 1 gir VE for PNV
+RDA_RE
+RDA_SkP
+RDA_OI
+```
+
+```{r}
+oRDA_RE <- rda(av~RR1+Rug3_m+Tpi1h_a,scale=T) #er lik PNV, for den f?rst utvalgte gruppa
+oRDA_SkP <- rda(av~Arbar_a + Sn_imp+Condition(RR1+Rug3_m+Tpi1h_a),scale=T)
+oRDA_OI <- rda(av~IfIu+Gab_a+Condition(Arbar_a + Sn_imp+RR1+Rug3_m+Tpi1h_a),scale=T)
+
+summary(oRDA_RE)$cont
+summary(oRDA_SkP)$cont #gir aksenes egenverdier
+summary(oRDA_OI)$cont
+```
+
+
+```{r}
+#Ekstraksjon av ONV; dette er vektorer
+ONV_RE <- scores(oRDA_RE, display="lc", choices=1, scaling=1)
+ONV_SkP <- -scores(oRDA_SkP, display="lc", choices=1, scaling=1)
+ONV_OI <- -scores(oRDA_OI, display="lc", choices=1, scaling=1)
+```
+
+```{r}
+#Sjekker om rONV'en har samme fortegn som variablen(e) som karakteriserer den, og gjlrb om n?dvendig ny ekstraksjon av sk?rer med motsatt fortegn
+cor.test(ONV_RE,Rr1_m,method="k")
+cor.test(ONV_SkP,Arbar_a,method="k")
+cor.test(ONV_OI,IfIu,method="k")
+```
+
+#Eksporterer evt sk?rer langs ONV'ene til Excel
+writeClipboard(as.character(ONV_RE))
+writeClipboard(as.character(ONV_SkP))
+writeClipboard(as.character(ONV_OI)) 
+
+```{r}
+#Rangerer ONV'ene
+
+rONV_RE <- (ONV_RE-min(ONV_RE))/(max(ONV_RE)-min(ONV_RE)) #Tar vare p? de korrigerte prim?rn?kkelvariablene
+rONV_SkP <- (ONV_SkP-min(ONV_SkP))/(max(ONV_SkP)-min(ONV_SkP))
+rONV_OI <- (ONV_OI-min(ONV_OI))/(max(ONV_OI)-min(ONV_OI))
+```
+
+
+
+#Eksporterer rONV-sk?rer til Excel
+
+writeClipboard(as.character(rONV_RE))
+writeClipboard(as.character(rONV_SkP))
+writeClipboard(as.character(rONV_OI))
+
+##########################################################
+#### Beregning av LA mellom KLG-klasser ved bruk av PD####
+##########################################################
+
+#Importerer om n?dvendig rPNVer fra Excel:
+
+#rPNV <- read.table("clipboard",header=T)
+#attach(rPNV)
+#names(rPNV)
+
+#Analyse av KLG'er representert ved rangerte n?kkelvariabler
+```{r}
+
+rONV <- rONV_OI
+
+#Inspeksjon av OE'enes frekvensfordeling langs rPNV'en
+hist(rONV)
+```
+
+
+
+
+#Importerer landskapsegenskapsprofiler fra regneark
+### DENNE FUNKER IKKE ### 
+### DENNE FUNKER IKKE ### lep <- read.table("clipboard",header=F)
+### DENNE FUNKER IKKE ###lep <- as.numeric(lep)
+### DENNE FUNKER IKKE ###attach(lep)
+### DENNE FUNKER IKKE ###names(lep)
+
+### DENNE FUNKER IKKE ###dim(lep)
+
+### DENNE FUNKER IKKE ####Beregner artsulikhet (PD)
+
+### DENNE FUNKER IKKE ###dist <- vegdist(lep,method="bray") 
+### DENNE FUNKER IKKE ###dist
+
+### DENNE FUNKER IKKE ####PD-verdiene er s? lave at det ikke er noe behov for ? bruke geodetisk avstand
+
+### DENNE FUNKER IKKE ####Eksporterer til Excel
+
+### DENNE FUNKER IKKE ###writeClipboard(as.character(dist)) #M? importeres som 'character' (jf. Crawley 2007: 77)
+
+### DENNE FUNKER IKKE ###cor.test(IfIu,rONV_AP)
+
+### DENNE FUNKER IKKE ### SLUTT ###
+
+###################################################################
+#### Analyser av samvariasjon mellom reskalerte rONV'er (sONV) ####
+###################################################################
+
+#Fig. 1. 1 IyK mot 2 RE; SN som symboler og isolinjer for Oyst_i
+
+```{r}
+#sONV'er som skal plottes mot hverandre
+s1 <- sONV_IyK
+s2 <- sONV_RE
+```
+
+#Finner koordinatene for hj?rner i det 'plotteomr?det' med koordinater (x1, x2, y1, y2) som gir
+#like enheter p? begge akser. Vi holder x1, x2 og y1 faste og bestemmer y2 slik at (x2-x1)/(y2-y1) i plt=c(x1,x2,y1,y2)
+#blir lik max(s1)/max(s2)
+#Det krever at y2 = [(x2-x1)*max(s2) + y1*max(s1)]/max(s1) 
+#Setter vi x1, x2 og y1 konstante, f?r vi:
+```{r}
+y2 <- (0.8*max(s2)+0.15*max(s1))/max(s1)
+y2
+```
+
+
+```{r}
+#Plotter SN-klasser p? figuren, og legger p? isolinjer for Oyst_i
+par(plt=c(0.15, 0.95, 0.15, y2))
+plot(s1,s2,xlab="KLG 1 IYF - Coastal plains (KS457)",ylab="KLG 2 RE - Coastal plains (KS457)",xlim=c(-0.01,max(s1)+0.01),ylim=c(-0.01,max(s2)+0.01),xaxp=c(0,0.4,5),yaxp=c(0,0.4,5),type="n") #Grunnlag for plotting av symboler etc.
+lines(c(0,max(s1)),c(max(s2),max(s2)),lty=3,col=8)
+lines(c(0,max(s1)),c(0,0),lty=3,col=8)
+lines(c(0,0),c(0,max(s2)),lty=3,col=8)
+lines(c(max(s1),max(s1)),c(0,max(s2)),lty=3,col=8)
+
+lines(c(0,max(s1)),c(max(s2)/3,max(s2)/3),lty=2,col=8)
+lines(c(0,max(s1)),c(2*max(s2)/3,2*max(s2)/3),lty=3,col=8)
+lines(c(0.2*max(s1),0.2*max(s1)),c(0,max(s2)-0.025),lty=2,col=8)
+lines(c(0.4*max(s1),0.4*max(s1)),c(0,max(s2)),lty=2,col=8)
+lines(c(0.6*max(s1),0.6*max(s1)),c(0,max(s2)),lty=2,col=8)
+lines(c(0.8*max(s1),0.8*max(s1)),c(0,max(s2)),lty=2,col=8)
+
+lines(c(0,0.142),c(max(s2),max(s2)),col=8)
+lines(c(0,0.142),c(max(s2)-0.025,max(s2)-0.025),col=8)
+lines(c(0.142,0.142),c(max(s2)-0.025,max(s2)),col=8)
+lines(c(0,0),c(max(s2)-0.025,max(s2)),col=8)
+points(0.01,max(s2)-0.012,pch=16,cex=0.5,col="black")
+points(0.02,max(s2)-0.012,pch=16,cex=0.6,col="lightblue2")
+points(0.03,max(s2)-0.012,pch=16,cex=0.75,col="darkblue")
+points(0.04,max(s2)-0.012,pch=1,cex=0.75,col="red")
+points(0.05,max(s2)-0.012,pch=16,cex=0.9,col="red")
+
+text(0.06,max(s2)-0.012,"SN & Oyst_i",adj=0,cex=0.8)
+points(s1[SN==1],s2[SN==1],pch=16,cex=0.5,col=1)
+points(s1[SN==2],s2[SN==2],pch=16,cex=0.6,col="lightblue2")
+points(s1[SN==3],s2[SN==3],pch=16,cex=0.75,col="darkblue")
+points(s1[SN==4],s2[SN==4],pch=1,cex=0.75,col="red")
+points(s1[SN==5],s2[SN==5],pch=16,cex=0.9,col="red")
+
+os <- ordisurf(snv[,c(1,2)],Oyst_i,display="sites",levels=c(0.19,0.454,0.574,0.643,0.693,0.733,0.768,0.798), col="red",add=T) #inkluderer plotting p? eksisterende ordinasjonsdiagram
+```
+
+
+```{r}
+  
+  #Plotter OI-klasser p? figuren, og legger p? isolinjer for IfIu
+  par(plt=c(0.15, 0.95, 0.15, y2))
+plot(s1,s2,xlab="KLG 1 IYF - Coastal plains (KS457)",ylab="KLG 2 RE - Coastal plains (KS457)",xlim=c(-0.01,max(s1)+0.01),ylim=c(-0.01,max(s2)+0.01),xaxp=c(0,0.4,5),yaxp=c(0,0.4,5),type="n") #Grunnlag for plotting av symboler etc.
+lines(c(0,max(s1)),c(max(s2),max(s2)),lty=3,col=8)
+lines(c(0,max(s1)),c(0,0),lty=3,col=8)
+lines(c(0,0),c(0,max(s2)),lty=3,col=8)
+lines(c(max(s1),max(s1)),c(0,max(s2)),lty=3,col=8)
+
+lines(c(0,max(s1)),c(max(s2)/3,max(s2)/3),lty=2,col=8)
+lines(c(0,max(s1)),c(2*max(s2)/3,2*max(s2)/3),lty=3,col=8)
+lines(c(0.2*max(s1),0.2*max(s1)),c(0,max(s2)-0.025),lty=2,col=8)
+lines(c(0.4*max(s1),0.4*max(s1)),c(0,max(s2)),lty=2,col=8)
+lines(c(0.6*max(s1),0.6*max(s1)),c(0,max(s2)),lty=2,col=8)
+lines(c(0.8*max(s1),0.8*max(s1)),c(0,max(s2)),lty=2,col=8)
+
+lines(c(0,0.142),c(max(s2),max(s2)),col=8)
+lines(c(0,0.142),c(max(s2)-0.025,max(s2)-0.025),col=8)
+lines(c(0.142,0.142),c(max(s2)-0.025,max(s2)),col=8)
+lines(c(0,0),c(max(s2)-0.025,max(s2)),col=8)
+points(0.01,max(s2)-0.012,pch=1,cex=0.6,col="lightblue3")
+points(0.02,max(s2)-0.012,pch=16,cex=0.6,col="lightblue3")
+points(0.03,max(s2)-0.012,pch=1,cex=0.75,col="lightblue4")
+points(0.04,max(s2)-0.012,pch=16,cex=0.75,col="lightblue4")
+points(0.05,max(s2)-0.012,pch=1,cex=0.9,col="red")
+points(0.06,max(s2)-0.012,pch=16,cex=0.9,col="red")
+
+text(0.07,max(s2)-0.012,"OI & IfIu",adj=0,cex=0.8)
+points(s1[OI==1],s2[OI==1],pch=1,cex=0.6,col="lightblue3")
+points(s1[OI==2],s2[OI==2],pch=16,cex=0.6,col="lightblue3")
+points(s1[OI==3],s2[OI==3],pch=1,cex=0.75,col="lightblue4")
+points(s1[OI==4],s2[OI==4],pch=16,cex=0.75,col="lightblue4")
+points(s1[OI==5],s2[OI==5],pch=1,cex=0.9,col="red")
+points(s1[OI==6],s2[OI==6],pch=16,cex=0.9,col="red")
+
+os <- ordisurf(snv[,c(1,2)],IfIu,display="sites",levels=c(1,2,4,6,8,10,11), col="red",add=T) #inkluderer plotting p? eksisterende ordinasjonsdiagram
+```
+
+
+```{r}
+#Plotter JP-klasser p? figuren, og legger p? isolinjer for Ar_full
+  par(plt=c(0.15, 0.95, 0.15, y2))
+plot(s1,s2,xlab="KLG 1 IYF - Coastal plains (KS457)",ylab="KLG 2 RE - Coastal plains (KS457)",xlim=c(-0.01,max(s1)+0.01),ylim=c(-0.01,max(s2)+0.01),xaxp=c(0,0.4,5),yaxp=c(0,0.4,5),type="n") #Grunnlag for plotting av symboler etc.
+lines(c(0,max(s1)),c(max(s2),max(s2)),lty=3,col=8)
+lines(c(0,max(s1)),c(0,0),lty=3,col=8)
+lines(c(0,0),c(0,max(s2)),lty=3,col=8)
+lines(c(max(s1),max(s1)),c(0,max(s2)),lty=3,col=8)
+
+lines(c(0,max(s1)),c(max(s2)/3,max(s2)/3),lty=2,col=8)
+lines(c(0,max(s1)),c(2*max(s2)/3,2*max(s2)/3),lty=3,col=8)
+lines(c(0.2*max(s1),0.2*max(s1)),c(0,max(s2)-0.025),lty=2,col=8)
+lines(c(0.4*max(s1),0.4*max(s1)),c(0,max(s2)),lty=2,col=8)
+lines(c(0.6*max(s1),0.6*max(s1)),c(0,max(s2)),lty=2,col=8)
+lines(c(0.8*max(s1),0.8*max(s1)),c(0,max(s2)),lty=2,col=8)
+
+lines(c(0,0.142),c(max(s2),max(s2)),col=8)
+lines(c(0,0.142),c(max(s2)-0.025,max(s2)-0.025),col=8)
+lines(c(0.142,0.142),c(max(s2)-0.025,max(s2)),col=8)
+lines(c(0,0),c(max(s2)-0.025,max(s2)),col=8)
+points(0.01,max(s2)-0.012,pch=1,cex=0.6,col="lightblue2")
+points(0.02,max(s2)-0.012,pch=16,cex=0.75,col="lightblue4")
+points(0.03,max(s2)-0.012,pch=16,cex=0.9,col="red")
+
+text(0.04,max(s2)-0.012,"JI & Arfull_a",adj=0,cex=0.8)
+
+points(s1[JP==1],s2[JP==1],pch=1,cex=0.6,col="lightblue2")
+points(s1[JP==2],s2[JP==2],pch=16,cex=0.75,col="lightblue4")
+points(s1[JP==3],s2[JP==3],pch=16,cex=0.9,col="red")
+
+os <- ordisurf(snv[,c(1,2)],Arfull_a,display="sites",levels=c(0.1,0.4,0.6), col="red",add=T) #inkluderer plotting p? eksisterende ordinasjonsdiagram
+```
+
+
+```{r}
+#Plotter MI-klasser p? figuren, og legger p? isolinjer for Mire_a
+  par(plt=c(0.15, 0.95, 0.15, y2))
+plot(s1,s2,xlab="KLG 1 IYF - Coastal plains (KS457)",ylab="KLG 2 RE - Coastal plains (KS457)",xlim=c(-0.01,max(s1)+0.01),ylim=c(-0.01,max(s2)+0.01),xaxp=c(0,0.4,5),yaxp=c(0,0.4,5),type="n") #Grunnlag for plotting av symboler etc.
+lines(c(0,max(s1)),c(max(s2),max(s2)),lty=3,col=8)
+lines(c(0,max(s1)),c(0,0),lty=3,col=8)
+lines(c(0,0),c(0,max(s2)),lty=3,col=8)
+lines(c(max(s1),max(s1)),c(0,max(s2)),lty=3,col=8)
+
+lines(c(0,max(s1)),c(max(s2)/3,max(s2)/3),lty=2,col=8)
+lines(c(0,max(s1)),c(2*max(s2)/3,2*max(s2)/3),lty=3,col=8)
+lines(c(0.2*max(s1),0.2*max(s1)),c(0,max(s2)-0.025),lty=2,col=8)
+lines(c(0.4*max(s1),0.4*max(s1)),c(0,max(s2)),lty=2,col=8)
+lines(c(0.6*max(s1),0.6*max(s1)),c(0,max(s2)),lty=2,col=8)
+lines(c(0.8*max(s1),0.8*max(s1)),c(0,max(s2)),lty=2,col=8)
+
+lines(c(0,0.142),c(max(s2),max(s2)),col=8)
+lines(c(0,0.142),c(max(s2)-0.025,max(s2)-0.025),col=8)
+lines(c(0.142,0.142),c(max(s2)-0.025,max(s2)),col=8)
+lines(c(0,0),c(max(s2)-0.025,max(s2)),col=8)
+points(0.01,max(s2)-0.012,pch=1,cex=0.6,col="lightblue4")
+points(0.02,max(s2)-0.012,pch=16,cex=0.6,col="red")
+
+text(0.03,max(s2)-0.012,"MP & Mire_a",adj=0,cex=0.8)
+
+points(s1[MP==1],s2[MP==1],pch=16,cex=0.6,col="lightblue4")
+points(s1[MP==2],s2[MP==2],pch=16,cex=0.6,col="red")
+
+os <- ordisurf(snv[,c(1,2)],Mire_a,display="sites",levels=c(0.05,0.1,0.2,0.4,0.6,0.8), col="red",add=T) #inkluderer plotting p? eksisterende ordinasjonsdiagram
+```
+
+
+```{r}
+#Plotter RE-klasser p? figuren, og legger p? isolinjer for RR1
+par(plt=c(0.15, 0.95, 0.15, y2))
+plot(s1,s2,xlab="KLG 1 IYF - Coastal plains (KS457)",ylab="KLG 2 RE - Coastal plains (KS457)",xlim=c(-0.01,max(s1)+0.01),ylim=c(-0.01,max(s2)+0.01),xaxp=c(0,0.4,5),yaxp=c(0,0.4,5),type="n") #Grunnlag for plotting av symboler etc.
+lines(c(0,max(s1)),c(max(s2),max(s2)),lty=3,col=8)
+lines(c(0,max(s1)),c(0,0),lty=3,col=8)
+lines(c(0,0),c(0,max(s2)),lty=3,col=8)
+lines(c(max(s1),max(s1)),c(0,max(s2)),lty=3,col=8)
+
+lines(c(0,max(s1)),c(max(s2)/3,max(s2)/3),lty=2,col=8)
+lines(c(0,max(s1)),c(2*max(s2)/3,2*max(s2)/3),lty=3,col=8)
+lines(c(0.2*max(s1),0.2*max(s1)),c(0,max(s2)-0.025),lty=2,col=8)
+lines(c(0.4*max(s1),0.4*max(s1)),c(0,max(s2)),lty=2,col=8)
+lines(c(0.6*max(s1),0.6*max(s1)),c(0,max(s2)),lty=2,col=8)
+lines(c(0.8*max(s1),0.8*max(s1)),c(0,max(s2)),lty=2,col=8)
+
+lines(c(0,0.142),c(max(s2),max(s2)),col=8)
+lines(c(0,0.142),c(max(s2)-0.025,max(s2)-0.025),col=8)
+lines(c(0.142,0.142),c(max(s2)-0.025,max(s2)),col=8)
+lines(c(0,0),c(max(s2)-0.025,max(s2)),col=8)
+points(0.01,max(s2)-0.012,pch=1,cex=0.6,col="lightblue4")
+points(0.02,max(s2)-0.012,pch=16,cex=0.6,col="red")
+
+points(0.01,max(s2)-0.012,pch=16,cex=0.5,col="black")
+points(0.02,max(s2)-0.012,pch=16,cex=0.6,col="lightblue2")
+points(0.03,max(s2)-0.012,pch=16,cex=0.75,col="darkblue")
+points(0.04,max(s2)-0.012,pch=1,cex=0.75,col="red")
+points(0.05,max(s2)-0.012,pch=16,cex=0.9,col="red")
+
+text(0.06,max(s2)-0.012,"SN & RR1",adj=0,cex=0.8)
+points(s1[SN==1],s2[SN==1],pch=16,cex=0.5,col=1)
+points(s1[SN==2],s2[SN==2],pch=16,cex=0.6,col="lightblue2")
+points(s1[SN==3],s2[SN==3],pch=16,cex=0.75,col="darkblue")
+points(s1[SN==4],s2[SN==4],pch=1,cex=0.75,col="red")
+points(s1[SN==5],s2[SN==5],pch=16,cex=0.9,col="red")
+
+os <- ordisurf(snv[,c(1,2)],RR1,display="sites",levels=c(25,50,75,100,150,200), col="red",add=T) #inkluderer plotting p? eksisterende ordinasjonsdiagram
+
+###
+```
+
+
+```{r}
+#Plotter RE-klasser p? figuren, og legger p? isolinjer for Rug3_m
+par(plt=c(0.15, 0.95, 0.15, y2))
+plot(s1,s2,xlab="KLG 1 IYF - Coastal plains (KS457)",ylab="KLG 2 RE - Coastal plains (KS457)",xlim=c(-0.01,max(s1)+0.01),ylim=c(-0.01,max(s2)+0.01),xaxp=c(0,0.4,5),yaxp=c(0,0.4,5),type="n") #Grunnlag for plotting av symboler etc.
+lines(c(0,max(s1)),c(max(s2),max(s2)),lty=3,col=8)
+lines(c(0,max(s1)),c(0,0),lty=3,col=8)
+lines(c(0,0),c(0,max(s2)),lty=3,col=8)
+lines(c(max(s1),max(s1)),c(0,max(s2)),lty=3,col=8)
+
+lines(c(0,max(s1)),c(max(s2)/3,max(s2)/3),lty=2,col=8)
+lines(c(0,max(s1)),c(2*max(s2)/3,2*max(s2)/3),lty=3,col=8)
+lines(c(0.2*max(s1),0.2*max(s1)),c(0,max(s2)-0.025),lty=2,col=8)
+lines(c(0.4*max(s1),0.4*max(s1)),c(0,max(s2)),lty=2,col=8)
+lines(c(0.6*max(s1),0.6*max(s1)),c(0,max(s2)),lty=2,col=8)
+lines(c(0.8*max(s1),0.8*max(s1)),c(0,max(s2)),lty=2,col=8)
+
+lines(c(0,0.142),c(max(s2),max(s2)),col=8)
+lines(c(0,0.142),c(max(s2)-0.025,max(s2)-0.025),col=8)
+lines(c(0.142,0.142),c(max(s2)-0.025,max(s2)),col=8)
+lines(c(0,0),c(max(s2)-0.025,max(s2)),col=8)
+points(0.01,max(s2)-0.012,pch=1,cex=0.6,col="lightblue4")
+points(0.02,max(s2)-0.012,pch=16,cex=0.6,col="red")
+
+points(0.01,max(s2)-0.012,pch=16,cex=0.5,col="black")
+points(0.02,max(s2)-0.012,pch=16,cex=0.6,col="lightblue2")
+points(0.03,max(s2)-0.012,pch=16,cex=0.75,col="darkblue")
+points(0.04,max(s2)-0.012,pch=1,cex=0.75,col="red")
+points(0.05,max(s2)-0.012,pch=16,cex=0.9,col="red")
+
+text(0.06,max(s2)-0.012,"SN & Rug3_m",adj=0,cex=0.8)
+points(s1[SN==1],s2[SN==1],pch=16,cex=0.5,col=1)
+points(s1[SN==2],s2[SN==2],pch=16,cex=0.6,col="lightblue2")
+points(s1[SN==3],s2[SN==3],pch=16,cex=0.75,col="darkblue")
+points(s1[SN==4],s2[SN==4],pch=1,cex=0.75,col="red")
+points(s1[SN==5],s2[SN==5],pch=16,cex=0.9,col="red")
+
+os <- ordisurf(snv[,c(1,2)],Rug3_m,display="sites",levels=c(0.1,0.2,0.4,0.6,0.8,0.9), col="red",add=T) #inkluderer plotting p? eksisterende ordinasjonsdiagram
+```
+
+
+```{r}
+#Fig. 2. 1 IyK mot 3 VP; SN som symboler og isolinjer for Inns_s
+
+#sONV'er som skal plottes mot hverandre
+s1 <- sONV_IyK
+s2 <- sONV_VP
+
+#Finner koordinatene for hj?rner i det 'plotteomr?det' med koordinater (x1, x2, y1, y2) som gir
+#like enheter p? begge akser. Vi holder x1, x2 og y1 faste og bestemmer y2 slik at (x2-x1)/(y2-y1) i plt=c(x1,x2,y1,y2)
+#blir lik max(s1)/max(s2)
+#Det krever at y2 = [(x2-x1)*max(s2) + y1*max(s1)]/max(s1) 
+#Setter vi x1, x2 og y1 konstante, f?r vi:
+y2 <- (0.8*max(s2)+0.15*max(s1))/max(s1)
+#y2
+
+par(plt=c(0.15, 0.95, 0.15, y2))
+plot(s1,s2,xlab="KLG 1 IYF - Coastal plains (KS457)",ylab="KLG 3 VP - Coastal plains (KS457)",xlim=c(-0.01,max(s1)+0.01),ylim=c(-0.01,max(s2)+0.01),xaxp=c(0,0.4,5),yaxp=c(0,0.4,5),type="n") #Grunnlag for plotting av symboler etc.
+lines(c(0,max(s1)),c(max(s2),max(s2)),lty=3,col=8)
+lines(c(0,max(s1)),c(0,0),lty=3,col=8)
+lines(c(0,0),c(0,max(s2)),lty=3,col=8)
+lines(c(max(s1),max(s1)),c(0,max(s2)),lty=3,col=8)
+
+polygon(c(4*max(s1)/5,4*max(s1)/5,max(s1),max(s1)),c(max(s2)/2,max(s2)-0.025,max(s2)-0.025,max(s2)/2),col="lightgray")
+polygon(c(4*max(s1)/5,4*max(s1)/5,max(s1),max(s1)),c(max(s2)/2,max(s2)-0.025,max(s2)-0.025,max(s2)/2),col="lightgray",density=10) #legger egentlig et skr?tt raster opp?, og fjerner streken rundt
+
+lines(c(0,max(s1)),c(max(s2)/2,max(s2)/2),lty=2,col=8)
+lines(c(0.2*max(s1),0.2*max(s1)),c(0,max(s2)),lty=2,col=8)
+lines(c(0.4*max(s1),0.4*max(s1)),c(0,max(s2)),lty=2,col=8)
+lines(c(0.6*max(s1),0.6*max(s1)),c(0,max(s2)),lty=2,col=8)
+lines(c(0.8*max(s1),0.8*max(s1)),c(0,max(s2)-0.025),lty=2,col=8)
+
+lines(c(max(s1)-0.14,max(s1)),c(max(s2),max(s2)),col=8)
+lines(c(max(s1)-0.14,max(s1)),c(max(s2)-0.025,max(s2)-0.025),col=8)
+lines(c(max(s1)-0.14,max(s1)-0.14),c(max(s2)-0.025,max(s2)),col=8)
+lines(c(max(s1),max(s1)),c(max(s2)-0.025,max(s2)),col=8)
+
+text(max(s1)-0.075,max(s2)-0.012,"SN & Inns_s",adj=0,cex=0.8)
+points(max(s1)-0.13,max(s2)-0.012,pch=16,cex=0.5,col="black")
+points(max(s1)-0.12,max(s2)-0.012,pch=16,cex=0.6,col="lightblue2")
+points(max(s1)-0.11,max(s2)-0.012,pch=16,cex=0.75,col="darkblue")
+points(max(s1)-0.10,max(s2)-0.012,pch=1,cex=0.75,col="red")
+points(max(s1)-0.09,max(s2)-0.012,pch=16,cex=0.9,col="red")
+
+points(s1[SN==1],s2[SN==1],pch=16,cex=0.5,col=1)
+points(s1[SN==2],s2[SN==2],pch=16,cex=0.6,col="lightblue2")
+points(s1[SN==3],s2[SN==3],pch=16,cex=0.75,col="darkblue")
+points(s1[SN==4],s2[SN==4],pch=1,cex=0.75,col="red")
+points(s1[SN==5],s2[SN==5],pch=16,cex=0.9,col="red")
+
+os <- ordisurf(snv[,c(1,3)],Inns_s,display="sites",levels=c(0.1,0.2,0.3,0.4,0.5,0.6), col="red",add=T) #inkluderer plotting p? eksisterende ordinasjonsdiagram
+```
+
+
+```{r}
+###
+
+#1 IyK mot 3 VP; SN som symboler og isolinjer for Mire_a
+
+par(plt=c(0.15, 0.95, 0.15, y2))
+plot(s1,s2,xlab="KLG 1 IYF - Coastal plains (KS457)",ylab="KLG 3 VP - Coastal plains (KS457)",xlim=c(-0.01,max(s1)+0.01),ylim=c(-0.01,max(s2)+0.01),xaxp=c(0,0.4,5),yaxp=c(0,0.4,5),type="n") #Grunnlag for plotting av symboler etc.
+lines(c(0,max(s1)),c(max(s2),max(s2)),lty=3,col=8)
+lines(c(0,max(s1)),c(0,0),lty=3,col=8)
+lines(c(0,0),c(0,max(s2)),lty=3,col=8)
+lines(c(max(s1),max(s1)),c(0,max(s2)),lty=3,col=8)
+
+polygon(c(4*max(s1)/5,4*max(s1)/5,max(s1),max(s1)),c(max(s2)/2,max(s2)-0.025,max(s2)-0.025,max(s2)/2),col="lightgray")
+polygon(c(4*max(s1)/5,4*max(s1)/5,max(s1),max(s1)),c(max(s2)/2,max(s2)-0.025,max(s2)-0.025,max(s2)/2),col="lightgray",density=10) #legger egentlig et skr?tt raster opp?, og fjerner streken rundt
+
+lines(c(0,max(s1)),c(max(s2)/2,max(s2)/2),lty=2,col=8)
+lines(c(0.2*max(s1),0.2*max(s1)),c(0,max(s2)),lty=2,col=8)
+lines(c(0.4*max(s1),0.4*max(s1)),c(0,max(s2)),lty=2,col=8)
+lines(c(0.6*max(s1),0.6*max(s1)),c(0,max(s2)),lty=2,col=8)
+lines(c(0.8*max(s1),0.8*max(s1)),c(0,max(s2)-0.025),lty=2,col=8)
+
+lines(c(max(s1)-0.14,max(s1)),c(max(s2),max(s2)),col=8)
+lines(c(max(s1)-0.14,max(s1)),c(max(s2)-0.025,max(s2)-0.025),col=8)
+lines(c(max(s1)-0.14,max(s1)-0.14),c(max(s2)-0.025,max(s2)),col=8)
+lines(c(max(s1),max(s1)),c(max(s2)-0.025,max(s2)),col=8)
+
+text(max(s1)-0.075,max(s2)-0.012,"SN & Mire_a",adj=0,cex=0.8)
+points(max(s1)-0.13,max(s2)-0.012,pch=16,cex=0.5,col="black")
+points(max(s1)-0.12,max(s2)-0.012,pch=16,cex=0.6,col="lightblue2")
+points(max(s1)-0.11,max(s2)-0.012,pch=16,cex=0.75,col="darkblue")
+points(max(s1)-0.10,max(s2)-0.012,pch=1,cex=0.75,col="red")
+points(max(s1)-0.09,max(s2)-0.012,pch=16,cex=0.9,col="red")
+
+points(s1[SN==1],s2[SN==1],pch=16,cex=0.5,col=1)
+points(s1[SN==2],s2[SN==2],pch=16,cex=0.6,col="lightblue2")
+points(s1[SN==3],s2[SN==3],pch=16,cex=0.75,col="darkblue")
+points(s1[SN==4],s2[SN==4],pch=1,cex=0.75,col="red")
+points(s1[SN==5],s2[SN==5],pch=16,cex=0.9,col="red")
+
+os <- ordisurf(snv[,c(1,3)],Mire_a,display="sites",levels=c(0.05,0.1,0.2,0.3,0.4,0.5,0.6), col="red",add=T) #inkluderer plotting p? eksisterende ordinasjonsdiagram
+```
+
+
+```{r}
+#Fig. 3. 2 RE mot 3 VP; SN som symboler og isolinjer for Inns_s
+##Ikke relevant for siste gangs analyse
+
+#sONV'er som skal plottes mot hverandre
+s1 <- sONV_RE
+s2 <- sONV_VP
+
+#Finner koordinatene for hj?rner i det 'plotteomr?det' med koordinater (x1, x2, y1, y2) som gir
+#like enheter p? begge akser. Vi holder x1, x2 og y1 faste og bestemmer y2 slik at (x2-x1)/(y2-y1) i plt=c(x1,x2,y1,y2)
+#blir lik max(s1)/max(s2)
+#Det krever at y2 = [(x2-x1)*max(s2) + y1*max(s1)]/max(s1) 
+#Setter vi x1, x2 og y1 konstante, f?r vi:
+y2 <- (0.8*max(s2)+0.15*max(s1))/max(s1)
+y2
+
+par(plt=c(0.15, 0.95, 0.15, y2))
+plot(s1,s2,xlab="KLG 2 RE - Coastal plains (KS457)",ylab="KLG 3 VP - Coastal plains (KS457)",xlim=c(-0.01,max(s1)+0.01),ylim=c(-0.01,max(s2)+0.01),xaxp=c(0,0.4,5),yaxp=c(0,0.4,5),type="n") #Grunnlag for plotting av symboler etc.
+lines(c(0,max(s1)),c(max(s2),max(s2)),lty=3,col=8)
+lines(c(0,max(s1)),c(0,0),lty=3,col=8)
+lines(c(0,0),c(0,max(s2)),lty=3,col=8)
+lines(c(max(s1),max(s1)),c(0,max(s2)),lty=3,col=8)
+
+polygon(c(max(s1)/2,max(s1),max(s1),max(s1)/2),c(max(s2)/2,max(s2)/2,max(s2),max(s2)),col="lightgray")
+polygon(c(max(s1)/2,max(s1),max(s1),max(s1)/2),c(max(s2)/2,max(s2)/2,max(s2),max(s2)),col="lightgray",density=10) #legger egentlig et skr?tt raster opp?, og fjerner streken rundt
+
+lines(c(0,max(s1)),c(max(s2)/2,max(s2)/2),lty=2,col=8)
+lines(c(max(s1)/2,max(s1)/2),c(0,max(s2)),lty=2,col=8)
+
+lines(c(0,0.095),c(max(s2),max(s2)),col=8)
+lines(c(0,0.095),c(max(s2)-0.02,max(s2)-0.02),col=8)
+lines(c(0.095,0.095),c(max(s2)-0.02,max(s2)),col=8)
+lines(c(0,0),c(max(s2)-0.02,max(s2)),col=8)
+
+points(0.007,max(s2)-0.01,pch=16,cex=0.5,col="black")
+points(0.014,max(s2)-0.01,pch=16,cex=0.6,col="lightblue2")
+points(0.021,max(s2)-0.01,pch=16,cex=0.75,col="darkblue")
+points(0.028,max(s2)-0.01,pch=1,cex=0.75,col="red")
+points(0.035,max(s2)-0.01,pch=16,cex=0.9,col="red")
+
+text(0.045,max(s2)-0.01,"SN & Inns_s",adj=0,cex=0.8)
+points(s1[SN==1],s2[SN==1],pch=16,cex=0.5,col=1)
+points(s1[SN==2],s2[SN==2],pch=16,cex=0.6,col="lightblue2")
+points(s1[SN==3],s2[SN==3],pch=16,cex=0.75,col="darkblue")
+points(s1[SN==4],s2[SN==4],pch=1,cex=0.75,col="red")
+points(s1[SN==5],s2[SN==5],pch=16,cex=0.9,col="red")
+
+os <- ordisurf(snv[,c(1,2)],Inns_s,display="sites",levels=c(0.1,0.2,0.3,0.4,0.5,0.6,0.7), col="red",add=T) #inkluderer plotting p? eksisterende ordinasjonsdiagram
+```
+
+
+```{r}
+###
+
+#Fig. 4. 1 IyK mot 4 SgP; SN som symboler og isolinjer for Maro_s ##Ikke relevant for siste gangs analyse
+
+#sONV'er som skal plottes mot hverandre
+s1 <- sONV_IyK
+#s2 <- sONV_SgP
+
+#Finner koordinatene for hj?rner i det 'plotteomr?det' med koordinater (x1, x2, y1, y2) som gir
+#like enheter p? begge akser. Vi holder x1, x2 og y1 faste og bestemmer y2 slik at (x2-x1)/(y2-y1) i plt=c(x1,x2,y1,y2)
+#blir lik max(s1)/max(s2)
+#Det krever at y2 = [(x2-x1)*max(s2) + y1*max(s1)]/max(s1) 
+#Setter vi x1, x2 og y1 konstante, f?r vi:
+y2 <- (0.8*max(s2)+0.15*max(s1))/max(s1)
+#y2
+
+par(plt=c(0.15, 0.95, 0.15, y2))
+plot(s1,s2,xlab="KLG 1 IYF - Coastal plains (KS457)",ylab="KLG 4 SgP - Coastal plains (KS457)",xlim=c(-0.01,max(s1)+0.01),ylim=c(-0.01,max(s2)+0.01),xaxp=c(0,0.4,5),yaxp=c(0,0.4,5),type="n") #Grunnlag for plotting av symboler etc.
+lines(c(0,max(s1)),c(max(s2),max(s2)),lty=3,col=8)
+lines(c(0,max(s1)),c(0,0),lty=3,col=8)
+lines(c(0,0),c(0,max(s2)),lty=3,col=8)
+lines(c(max(s1),max(s1)),c(0,max(s2)),lty=3,col=8)
+
+polygon(c(0,0,0.8*max(s1),0.8*max(s1)),c(0,max(s2)/2,max(s2)/2,0),col="lightgray")
+polygon(c(0,0,0.8*max(s1),0.8*max(s1)),c(0,max(s2)/2,max(s2)/2,0),col="lightgray",density=10) #legger egentlig et skr?tt raster opp?, og fjerner streken rundt
+
+lines(c(0,max(s1)),c(max(s2)/2,max(s2)/2),lty=2,col=8)
+lines(c(0.2*max(s1),0.2*max(s1)),c(0.025,max(s2)),lty=2,col=8)
+lines(c(0.4*max(s1),0.4*max(s1)),c(0,max(s2)),lty=2,col=8)
+lines(c(0.6*max(s1),0.6*max(s1)),c(0,max(s2)),lty=2,col=8)
+lines(c(0.8*max(s1),0.8*max(s1)),c(0,max(s2)),lty=2,col=8)
+
+polygon(c(0,0,0.142,0.142),c(0,0.025,0.025,0),col="white")
+polygon(c(0,0,0.142,0.142),c(0,0.025,0.025,0),col="white",density=10) #legger egentlig et skr?tt raster opp?, og fjerner streken rundt
+
+lines(c(0,0.142),c(0,0),col=8)
+lines(c(0,0.142),c(0.025,0.025),col=8)
+lines(c(0,0),c(0,0.025),col=8)
+lines(c(0.142,0.142),c(0,0.025),col=8)
+
+points(0.01,0.012,pch=16,cex=0.5,col="black")
+points(0.02,0.012,pch=16,cex=0.6,col="lightblue2")
+points(0.03,0.012,pch=16,cex=0.75,col="darkblue")
+points(0.04,0.012,pch=1,cex=0.75,col="red")
+points(0.05,0.012,pch=16,cex=0.9,col="red")
+
+text(0.06,0.012,"SN & Maro_s",adj=0,cex=0.8)
+points(s1[SN==1],s2[SN==1],pch=16,cex=0.5,col=1)
+points(s1[SN==2],s2[SN==2],pch=16,cex=0.6,col="lightblue2")
+points(s1[SN==3],s2[SN==3],pch=16,cex=0.75,col="darkblue")
+points(s1[SN==4],s2[SN==4],pch=1,cex=0.75,col="red")
+points(s1[SN==5],s2[SN==5],pch=16,cex=0.9,col="red")
+
+os <- ordisurf(snv[,c(1,4)],Maro_s,display="sites",levels=c(0.1,0.2,0.3,0.4,0.5,0.6,0.7), col="red",add=T) #inkluderer plotting p? eksisterende ordinasjonsdiagram
+```
+
+
+```{r}
+###
+
+#Fig. 5. 1 IyK mot 4 SkP; SN som symboler og isolinjer for Arbla_a
+
+#sONV'er som skal plottes mot hverandre
+s1 <- sONV_IyK
+s2 <- sONV_SkP
+
+#Finner koordinatene for hj?rner i det 'plotteomr?det' med koordinater (x1, x2, y1, y2) som gir
+#like enheter p? begge akser. Vi holder x1, x2 og y1 faste og bestemmer y2 slik at (x2-x1)/(y2-y1) i plt=c(x1,x2,y1,y2)
+#blir lik max(s1)/max(s2)
+#Det krever at y2 = [(x2-x1)*max(s2) + y1*max(s1)]/max(s1) 
+#Setter vi x1, x2 og y1 konstante, f?r vi:
+y2 <- (0.8*max(s2)+0.15*max(s1))/max(s1)
+y2
+
+par(plt=c(0.15, 0.95, 0.15, y2))
+plot(s1,s2,xlab="KLG 1 IYF - Coastal plains (KS457)",ylab="KLG 4 SkP - Coastal plains (KS457)",xlim=c(-0.01,max(s1)+0.01),ylim=c(-0.01,max(s2)+0.01),xaxp=c(0,0.4,5),yaxp=c(0,0.4,5),type="n") #Grunnlag for plotting av symboler etc.
+lines(c(0,max(s1)),c(max(s2),max(s2)),lty=3,col=8)
+lines(c(0,max(s1)),c(0,0),lty=3,col=8)
+lines(c(0,0),c(0,max(s2)),lty=3,col=8)
+lines(c(max(s1),max(s1)),c(0,max(s2)),lty=3,col=8)
+
+polygon(c(4*max(s1)/5,4*max(s1)/5,max(s1),max(s1)),c(0.025,max(s2),max(s2),0.025),col="lightgray")
+polygon(c(4*max(s1)/5,4*max(s1)/5,max(s1),max(s1)),c(0.025,max(s2),max(s2),0.025),col="lightgray",density=10) #legger egentlig et skr?tt raster opp?, og fjerner streken rundt
+
+polygon(c(max(s1)-0.142,max(s1)-0.142,4*max(s1)/5,4*max(s1)/5),c(0.025,max(s2)/2,max(s2)/2,0.025),col="lightgray")
+polygon(c(max(s1)-0.142,max(s1)-0.142,4*max(s1)/5,4*max(s1)/5),c(0.025,max(s2)/2,max(s2)/2,0.025),col="lightgray",density=10) #legger egentlig et skr?tt raster opp?, og fjerner streken rundt
+
+polygon(c(3*max(s1)/5,3*max(s1)/5,max(s1)-0.142,max(s1)-0.142),c(0,max(s2)/2,max(s2)/2,0),col="lightgray")
+polygon(c(3*max(s1)/5,3*max(s1)/5,max(s1)-0.142,max(s1)-0.142),c(0,max(s2)/2,max(s2)/2,0),col="lightgray",density=10) #legger egentlig et skr?tt raster opp?, og fjerner streken rundt
+
+lines(c(0,max(s1)),c(max(s2)/2,max(s2)/2),lty=2,col=8)
+lines(c(0.2*max(s1),0.2*max(s1)),c(0,max(s2)),lty=2,col=8)
+lines(c(0.4*max(s1),0.4*max(s1)),c(0,max(s2)),lty=2,col=8)
+lines(c(0.6*max(s1),0.6*max(s1)),c(0,max(s2)),lty=2,col=8)
+lines(c(0.8*max(s1),0.8*max(s1)),c(0,max(s2)-0.025),lty=2,col=8)
+
+lines(c(max(s1)-0.142,max(s1)),c(0,0),col=8)
+lines(c(max(s1)-0.142,max(s1)),c(0.025,0.025),col=8)
+lines(c(max(s1)-0.142,max(s1)-0.142),c(0,0.025),col=8)
+lines(c(max(s1),max(s1)),c(0,0.025),col=8)
+
+points(max(s1)-0.142+0.01,0.012,pch=16,cex=0.5,col="black")
+points(max(s1)-0.142+0.02,0.012,pch=16,cex=0.6,col="lightblue2")
+points(max(s1)-0.142+0.03,0.012,pch=16,cex=0.75,col="darkblue")
+points(max(s1)-0.142+0.04,0.012,pch=1,cex=0.75,col="red")
+points(max(s1)-0.142+0.05,0.012,pch=16,cex=0.9,col="red")
+
+text(max(s1)-0.142+0.06,0.012,"SN & Arbla_a",adj=0,cex=0.8)
+points(s1[SN==1],s2[SN==1],pch=16,cex=0.5,col=1)
+points(s1[SN==2],s2[SN==2],pch=16,cex=0.6,col="lightblue2")
+points(s1[SN==3],s2[SN==3],pch=16,cex=0.75,col="darkblue")
+points(s1[SN==4],s2[SN==4],pch=1,cex=0.75,col="red")
+points(s1[SN==5],s2[SN==5],pch=16,cex=0.9,col="red")
+
+os <- ordisurf(snv[,c(1,4)],Arbla_a,display="sites",levels=c(0.1,0.2,0.3,0.4,0.5,0.6,0.7), col="red",add=T) #inkluderer plotting p? eksisterende ordinasjonsdiagram
+```
+
+
+```{r}
+###
+
+#Fig. 6. 1 IyK mot 6 OI; OI som symboler og isolinjer for Gab_a
+
+#sONV'er som skal plottes mot hverandre
+s1 <- sONV_IyK
+s2 <- sONV_OI
+
+#Finner koordinatene for hj?rner i det 'plotteomr?det' med koordinater (x1, x2, y1, y2) som gir
+#like enheter p? begge akser. Vi holder x1, x2 og y1 faste og bestemmer y2 slik at (x2-x1)/(y2-y1) i plt=c(x1,x2,y1,y2)
+#blir lik max(s1)/max(s2)
+#Det krever at y2 = [(x2-x1)*max(s2) + y1*max(s1)]/max(s1) 
+#Setter vi x1, x2 og y1 konstante, f?r vi:
+y2 <- (0.8*max(s2)+0.15*max(s1))/max(s1)
+y2
+
+
+#Plotter OI-klasser p? figuren, og legger p? isolinjer for Gab_a
+par(plt=c(0.15, 0.95, 0.15, y2))
+plot(s1,s2,xlab="KLG 1 IYF - Coastal plains (KS457)",ylab="KLG 6 Gab_a - Coastal plains (KS457)",xlim=c(-0.01,max(s1)+0.01),ylim=c(-0.01,max(s2)+0.01),xaxp=c(0,0.4,5),yaxp=c(0,0.4,5),type="n") #Grunnlag for plotting av symboler etc.
+lines(c(0,max(s1)),c(max(s2),max(s2)),lty=3,col=8)
+lines(c(0,max(s1)),c(0,0),lty=3,col=8)
+lines(c(0,0),c(0,max(s2)),lty=3,col=8)
+lines(c(max(s1),max(s1)),c(0,max(s2)),lty=3,col=8)
+
+lines(c(0,max(s1)),c(max(s2)/2,max(s2)/2),lty=2,col=8)
+lines(c(0.2*max(s1),0.2*max(s1)),c(0,max(s2)-0.025),lty=2,col=8)
+lines(c(0.4*max(s1),0.4*max(s1)),c(0,max(s2)),lty=2,col=8)
+lines(c(0.6*max(s1),0.6*max(s1)),c(0,max(s2)),lty=2,col=8)
+lines(c(0.8*max(s1),0.8*max(s1)),c(0,max(s2)),lty=2,col=8)
+
+lines(c(0,0.142),c(0,0),col=8)
+lines(c(0,0.142),c(0.025,0.025),col=8)
+lines(c(0.142,0.142),c(0,0.025),col=8)
+lines(c(0,0),c(0,0.025),col=8)
+
+points(0.01,0.012,pch=1,cex=0.6,col="lightblue3")
+points(0.02,0.012,pch=16,cex=0.6,col="lightblue3")
+points(0.03,0.012,pch=1,cex=0.75,col="lightblue4")
+points(0.04,0.012,pch=16,cex=0.75,col="lightblue4")
+points(0.05,0.012,pch=1,cex=0.9,col="red")
+points(0.06,0.012,pch=16,cex=0.9,col="red")
+
+text(0.07,0.012,"OI & Gab_a",adj=0,cex=0.8)
+points(s1[OI==1],s2[OI==1],pch=1,cex=0.6,col="lightblue3")
+points(s1[OI==2],s2[OI==2],pch=16,cex=0.6,col="lightblue3")
+points(s1[OI==3],s2[OI==3],pch=1,cex=0.75,col="lightblue4")
+points(s1[OI==4],s2[OI==4],pch=16,cex=0.75,col="lightblue4")
+points(s1[OI==5],s2[OI==5],pch=1,cex=0.9,col="red")
+points(s1[OI==6],s2[OI==6],pch=16,cex=0.9,col="red")
+
+os <- ordisurf(snv[,c(1,6)],Gab_a,display="sites",levels=c(0.1,0.2,0.4,0.6,0.8), col="red",add=T) #inkluderer plotting p? eksisterende ordinasjonsdiagram
+```
+
 
 ```{r}
 library(goeveg)
@@ -1423,7 +2260,10 @@ specresponse2 <- function(species, var, main, xlab, model = "auto", method = "en
     stop("No species in matrix.")
   }
 }
+```
 
+
+```{r}
 par(mar=c(5.1, 4.1, 4.1, 12.1), xpd=TRUE)
 
 specresponse2 (av[ ,c(2,3,31,44,32, 49,54,68,78,82)], main = " ", akse1, xlab = "GNMDS 1 (Coastal plains, outer- inner coast)")
