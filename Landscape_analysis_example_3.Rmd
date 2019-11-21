@@ -262,24 +262,7 @@ kable(corr.matrise) %>%
 ```
 
 
-significance_formatter <- 
-  formatter("span", 
-            style = x ~ style(
-            font.weight = ifelse(x <= -0.5 | x >= 0.5, "bold", "plain"),
-              color = ifelse( x <= -0.5, "brown", 
-                            ifelse(x <= -0.1, "red", 
-                                   ifelse(x >= 0.5, "brown", 
-                                          ifelse(x >= 0.3, "red", 
-                                                 "black"))))))
 
-formattable(corr.matrise, align =c("l","l","c","c","c", "c"), list(
-  `Indicator Name` = 
-    formatter("span", style = ~ style(color = "grey",font.weight = "bold")), 
-    `GNMDS1` = significance_formatter, 
-    `GNMDS2` = significance_formatter,
-    `GNMDS3` = significance_formatter,
-    `GNMDS4` = significance_formatter
-))
 
 
 ```{r, cache = TRUE, include=FALSE}
@@ -495,7 +478,7 @@ text(-0.72,0.41,"JP = 3",adj=0,cex=0.8)
 ```
 
 
-```{r, echo=FALSE}
+```{r, fig.height = 3, fig.width = 3}
 ##For JI med JP (akser 1 og 2)
 
 hist(JI,  main = " ")
@@ -549,7 +532,7 @@ text(-0.72,0.53,"JK2 = H (> 50 % MA)",adj=0,cex=0.8)
 ```
 
 
-```{r, echo=FALSE}
+```{r, fig.height = 3, fig.width = 3}
 ##For Arlov_a (den enkeltvariabelen som er sterkest korrelert med akse 1) blant SN-relaterte variabler
 
 hist(Arlov_a,  main = " ")
@@ -618,7 +601,7 @@ text(-0.72,0.33,"SN = 5",adj=0,cex=0.8)
 ```
 
 
-```{r, echo=FALSE}
+```{r, fig.height = 3.5, fig.width = 6}
 par(mfrow=c(1,2))
 plot(IfI,Oyst_i)
 hist(Oyst_i[IfI==0], main= " ")
@@ -653,7 +636,7 @@ points(-0.75,0.33,pch=16,cex=0.9,col="red")
 text(-0.72,0.33,"SN = 5",adj=0,cex=0.8)
 ```
 
-```{r, echo=FALSE}
+```{r, fig.height = 3, fig.width = 3}  
 #For RR1 (varierer fra 12 til 364) med SN
 
 hist(RR1)
@@ -766,19 +749,25 @@ voG1l <- rda(av~Crug3_m,scale=T)
 voG1l
 tvoG1l <- permutest(voG1l,permutations=9999)
 tvoG1l
-
+```{r}
 voG1ca <- rda(av~RR1+Condition(Rug3_m),scale=T)
 voG1ca
 tvoG1ca <- permutest(voG1ca,permutations=9999)
 tvoG1ca
+```
+
 voG1cb <- rda(av~Crug9_m+Condition(Rug3_m),scale=T)
 voG1cb
 tvoG1cb <- permutest(voG1cb,permutations=9999)
 tvoG1cb
+```{r}
+
 voG1cd <- rda(av~Cr3_u_a+Condition(Rug3_m),scale=T)
 voG1cd
 tvoG1cd <- permutest(voG1cd,permutations=9999)
 tvoG1cd
+
+```
 voG1ce <- rda(av~Flat_a+Condition(Rug3_m),scale=T)
 voG1ce
 tvoG1ce <- permutest(voG1ce,permutations=9999)
@@ -811,13 +800,12 @@ voG1cl <- rda(av~Crug3_m+Condition(Rug3_m),scale=T)
 voG1cl
 tvoG1cl <- permutest(voG1cl,permutations=9999)
 tvoG1cl
-```{r}
+
 voG1cja <- rda(av~RR1+Condition(Rug3_m+Tpi1h_a),scale=T)
 voG1cja
 tvoG1cja <- permutest(voG1cja,permutations=9999)
 tvoG1cja
 
-```
 voG1cjb <- rda(av~Crug9_m+Condition(Rug3_m+Tpi1h_a),scale=T)
 voG1cjb
 tvoG1cjb <- permutest(voG1cjb,permutations=9999)
@@ -1287,19 +1275,24 @@ tvoGUA2
 #VE for 1 .akse i RDA'er gir VA(PNV)
 ```{r}
 RDA_IYK <- rda(av~R_net_a+Ekspve_a  + Oyst_i,scale=T)
+
+```
 RDA_RE <- rda(av~Rug3_m + Tpi1h_a,scale=T)
 RDA_VP <- rda(av~Dismire+Inns_s + Dislake,scale=T)
 RDA_SkP <- rda(av~Arlov_a + Arbla_a,scale=T)
 RDA_OI <- rda(av~IfI+Gab_a,scale=T)
 
 #EV for RDA 1 gir VE for PNV
-
+```{r}
 summary(RDA_IYK)$cont
+```
+
+
 summary(RDA_RE)$cont
 summary(RDA_VP)$cont
 summary(RDA_SkP)$cont
 summary(RDA_OI)$cont
-```
+
 ```{r}
 #Finner oPNV'er
 
@@ -1308,13 +1301,17 @@ oRDA_RE <- rda(av~Rug3_m + Tpi1h_a+Condition(R_net_a+Ekspve_a  + Oyst_i),scale=T
 oRDA_VP <- rda(av~Dismire+Inns_s + Dislake+Condition(R_net_a+Ekspve_a  + Oyst_i +Rug3_m + Tpi1h_a),scale=T)
 oRDA_SkP <- rda(av~Arlov_a + Arbla_a+Condition(Dismire+Inns_s + Dislake+R_net_a+Ekspve_a  + Oyst_i +Rug3_m + Tpi1h_a),scale=T)
 oRDA_OI <- rda(av~IfI+Gab_a+Condition(Arlov_a + Arbla_a+Dismire+Inns_s + Dislake+R_net_a+Ekspve_a  + Oyst_i + Rug3_m + Tpi1h_a),scale=T)
+```
 
+
+```{r}
 summary(oRDA_IYK)$cont  #gir egenverdien for RDA-akse 1
+```
 summary(oRDA_RE)$cont
 summary(oRDA_VP)$cont
 summary(oRDA_SkP)$cont
 summary(oRDA_OI)$cont
-```
+
 
 ```{r}
 #Ekstraksjon av ONV; dette er vektorer
@@ -1346,7 +1343,9 @@ rONV_SkP <- (ONV_SkP-min(ONV_SkP))/(max(ONV_SkP)-min(ONV_SkP))
 rONV_OI <- (ONV_OI-min(ONV_OI))/(max(ONV_OI)-min(ONV_OI))
 ```
 
-
+```{r}
+head(rONV_IYK)
+```
 
 #Eksporterer rONV-sk?rer til Excel
 
@@ -1369,7 +1368,10 @@ writeClipboard(as.character(rONV_OI))
 #Analyse av KLG'er representert ved rangerte n?kkelvariabler
 
 rPNV <- rONV_IYK
+```
 
+
+```{r, fig.height = 3, fig.width = 3}
 #Inspeksjon av OE'enes frekvensfordeling langs rPNV'en
 hist(rPNV)
 
@@ -1418,7 +1420,7 @@ hist(rPNV)
 #attach(dta_pnv)
 
 #VE for 1 .akse i RDA'er gir VA(PNV)
-```{r}
+```{r, include=FALSE}
 RDA_RE <- rda(av~RR1+Rug3_m+Tpi1h_a,scale=T) #er lik PNV, for den f?rst utvalgte gruppa
 RDA_SkP <- rda(av~Arbar_a + Sn_imp,scale=T)
 RDA_OI <- rda(av~IfIu+Gab_a,scale=T)
@@ -1427,6 +1429,11 @@ RDA_RE
 RDA_SkP
 RDA_OI
 ```
+```{r}
+summary(oRDA_RE)$cont
+```
+
+
 
 ```{r}
 oRDA_RE <- rda(av~RR1+Rug3_m+Tpi1h_a,scale=T) #er lik PNV, for den f?rst utvalgte gruppa
@@ -1437,6 +1444,7 @@ summary(oRDA_RE)$cont
 summary(oRDA_SkP)$cont #gir aksenes egenverdier
 summary(oRDA_OI)$cont
 ```
+
 
 
 ```{r}
@@ -2181,7 +2189,7 @@ specresponse2 <- function(species, var, main, xlab, model = "auto", method = "en
                {specresponse <- glm.2; deg<-2},
                {specresponse <- glm.3; deg<-3})
         
-        print(paste("GLM with", deg, "degrees fitted for", specnames[i]))
+        #print(paste("GLM with", deg, "degrees fitted for", specnames[i]))
         
       } else if (model == "gam") {
         
